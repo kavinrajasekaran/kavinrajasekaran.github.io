@@ -1,180 +1,247 @@
-<!DOCTYPE HTML>
-<!--
-	Solid State by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Kavin's Website</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kavin Rajasekaran</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <img src="assets/profile-pic-small.jpg" alt="Kavin Rajasekaran" class="profile-pic-small">
+        <a href="/">kavin</a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="gems.html">Gems</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </nav>
+    </header>
 
-		<!-- Page Wrapper -->
-			<div id="page-wrapper">
+    <main>
+      <section class="hero">
+        <h1>Kavin Rajasekaran</h1>
+        <p class="subtitle">Student, software engineer, cryptography researcher</p>
 
-				<!-- Header -->
-					<header id="header" class="alt">
-						<h1><a href="index.html">Solid State</a></h1>
-						<nav>
-							<a href="#menu">Menu</a>
-						</nav>
-					</header>
+        <div class="bio">
+          <p>I'm a Master's student in Electrical & Computer Engineering at UC Davis and a Computer Science & Engineering graduate from UC Merced, with a passion for developing efficient and effective solutions.</p>
+          
+          <p>If you'd like to chat, feel free to reach out via one of the socials listed below!</p>
+        </div>
 
-				<!-- Menu -->
-					<nav id="menu">
-						<div class="inner">
-							<h2>Menu</h2>
-							<ul class="links">
-								<li><a href="index.html">Home</a></li>
-								<li><a href="july2024kavinrajasekaranresume.pdf">Resume</a></li>
-								<li><a href="elements.html">Elements</a></li>
-								<!-- <li><a href="#">Log In</a></li>
-								<li><a href="#">Sign Up</a></li> -->
-							</ul>
-							<a href="#" class="close">Close</a>
-						</div>
-					</nav>
+        <div class="social-links">
+          <a href="https://discord.com/users/kavinrajasekaran" target="_blank" title="Discord">Discord</a>
+          <a href="https://github.com/kavinrajasekaran" target="_blank" title="GitHub">GitHub</a>
+          <a href="https://linkedin.com/in/kavin-rajasekaran" target="_blank" title="LinkedIn">LinkedIn</a>
+          <a href="https://twitter.com/kavinraj" target="_blank" title="X">X</a>
+          <a href="https://bsky.app/profile/kavinrajasekaran.bsky.social" target="_blank" title="Bluesky">Bluesky</a>
+          <a href="mailto:kavin.krajasekaran@gmail.com" title="Email">Email</a>
+        </div>
+      </section>
 
-				<!-- Banner -->
-					<section id="banner">
-						<div class="inner">
-							<div class="logo"><span class="icon fa-gem"></span></div>
-							<h2>Kavin Rajasekaran</h2>
-							<p>Computer Science and Engineering @ UC Merced </p>
-						</div>
-					</section>
+      <section class="experience">
+        <h2>Experience</h2>
 
-				<!-- Wrapper -->
-					<section id="wrapper">
+        <ul class="experience-list">
+          <li class="experience-item">
+            <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+            </svg>
+            <div class="experience-item-header">
+              <img src="assets/companies/llnl.png" alt="LLNL" class="company-logo">
+              <h3>Lawrence Livermore National Laboratory</h3>
+              <div class="position-wrapper">
+                <p class="position">Data Science Intern</p>
+              </div>
+              <div class="duration-wrapper">
+                <span class="status-indicator status-future"></span>
+                <p class="duration">Incoming Summer 2025</p>
+              </div>
+            </div>
+            <p class="description">I'll be joining Lawrence Livermore National Laboratory as a Data Science Intern in July 2025.</p>
+          </li>
 
-						<!-- One -->
-							<section id="one" class="wrapper spotlight style1">
-								<div class="inner">
-									<a href="#" class="image"><img src="images/pleasebru.jpeg" alt="" /></a>
-									<div class="content">
-										<h2 class="major">About Me</h2>
-										<p>I'm a CSE major at UC Merced, and my interests are parallel computing techniques and computer vision. I have research experience with SIMD programming and I'm currently a fellow @ Headstarter AI. Feel free to reach out to krajasekaran@ucmerced.edu.</p>
-										<a href="july2024kavinrajasekaranresume.pdf" class="special">Resume</a>
-									</div>
-								</div>
-							</section>
+          <li class="experience-item">
+            <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+            </svg>
+            <div class="experience-item-header">
+              <img src="assets/companies/semcorel.png" alt="Semcorel" class="company-logo">
+              <h3>Semcorel, Inc.</h3>
+              <div class="position-wrapper">
+                <p class="position">Software Engineer Intern</p>
+              </div>
+              <div class="duration-wrapper">
+                <span class="status-indicator status-past"></span>
+                <p class="duration">September 2024 – January 2025</p>
+              </div>
+            </div>
+            <p class="description">I launched a retrieval-augmented system integrated into an iOS app, combining a chatbot with Python, Llama 3.2, LangChain, and SentenceTransformers to assist seniors in smartwatch troubleshooting, reducing response time to under 3 seconds.</p>
+          </li>
 
-						<!-- Two -->
-							<!-- <section id="two" class="wrapper alt spotlight style2">
-								<div class="inner">
-									<a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>
-									<div class="content">
-										<a href="#" class="special">Learn more</a>
-									</div>
-								</div>
-							</section> -->
+          <li class="experience-item">
+            <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+            </svg>
+            <div class="experience-item-header">
+              <img src="assets/companies/ucmerced.png" alt="UC Merced" class="company-logo">
+              <h3>UC Merced</h3>
+              <div class="position-wrapper">
+                <p class="position">Systems & Cryptography Research Assistant</p>
+              </div>
+              <div class="duration-wrapper">
+                <span class="status-indicator status-past"></span>
+                <p class="duration">May 2024 – January 2025</p>
+              </div>
+            </div>
+            <p class="description">Working under Dr. Qian Wang, I engineered high-performance implementations of SPHINCS+ digital signatures by parallelizing core components with AVX512, achieving a 56% runtime reduction over the AVX2 baseline. I also co-authored the peer-reviewed paper "Exploring Parallel Implementation of SPHINCS+ using Advanced Vector Extensions (AVX) Sets," accepted at ISQED 2025.</p>
+          </li>
 
-						<!-- Three -->
-							<!-- <section id="three" class="wrapper spotlight style3">
-								<div class="inner">
-									<a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>
-									<div class="content">
-										<h2 class="major">Nullam dignissim</h2>
-										<p>Lorem ipsum dolor sit amet, etiam lorem adipiscing elit. Cras turpis ante, nullam sit amet turpis non, sollicitudin posuere urna. Mauris id tellus arcu. Nunc vehicula id nulla dignissim dapibus. Nullam ultrices, neque et faucibus viverra, ex nulla cursus.</p>
-										<a href="#" class="special">Learn more</a>
-									</div>
-								</div>
-							</section> -->
+          <li class="experience-item">
+            <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+            </svg>
+            <div class="experience-item-header">
+              <img src="assets/companies/ucmerced.png" alt="UC Merced" class="company-logo">
+              <h3>UC Merced</h3>
+              <div class="position-wrapper">
+                <p class="position">Electrical Engineering Undergraduate Teaching Assistant</p>
+              </div>
+              <div class="duration-wrapper">
+                <span class="status-indicator status-past"></span>
+                <p class="duration">August 2024 – December 2024</p>
+              </div>
+            </div>
+            <p class="description">I designed course curriculum and slides for a new Electrical Engineering course, including an ML project using MNIST data. I mentored 70+ students in Electrical Engineering lectures, assisting with Python, C++, MATLAB, and open circuit design.</p>
+          </li>
 
-						<!-- Four -->
-							<section id="four" class="wrapper alt style1">
-								<div class="inner">
-									<h2 class="major">Skills</h2>
-									<p>Experienced in C++, C, Python, SIMD programming.</p>
-									<h2 class = "major"> Projects</h2>
-									<section class="features">
-										<article>
-											<a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
-											<h3 class="major">pdfGPT</h3>
-											<p>Used Flask, Python, and HTML to create an online PDF summarizing tool.</p>
+          <li class="experience-item">
+            <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+            </svg>
+            <div class="experience-item-header">
+              <img src="assets/companies/ucmerced.png" alt="UC Merced" class="company-logo">
+              <h3>UC Merced</h3>
+              <div class="position-wrapper">
+                <p class="position">Physics Undergraduate Teaching Assistant</p>
+              </div>
+              <div class="duration-wrapper">
+                <span class="status-indicator status-past"></span>
+                <p class="duration">August 2024 – December 2024</p>
+              </div>
+            </div>
+            <p class="description">I assisted in teaching introductory physics courses, helping students understand fundamental concepts and problem-solving techniques. I conducted office hours and review sessions to support student learning.</p>
+          </li>
+        </ul>
+      </section>
 
-											<a href="https://github.com/kavinrajasekaran/pdfgpt" class="special">View on github</a>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
-											<h3 class="major">UC Merced Course Stats.</h3>
-											<p>Built an improved course scheduling software for UC Merced. Implemented important features such as viewing an instructor’s ratings, class grading policies, prerequisites,
-												corequisites, and any required textbooks.</p>
-											<a href="https://github.com/Insainian/UCM-Course-Stats/" class="special">Learn more</a>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
-											<h3 class="major">Project Fishtank @ ACM UC Merced</h3>
-											<p>The goal of this project is to re-purpose Chromebooks past their Auto Update Expiration date and convert them
-												into a computer with a new operating system and run a Tor Protocol</p>
-											<!-- <a href="#" class="special">Learn more</a> -->
-										</article>
-										
-									</section>
-									<ul class="actions">
-										<li><a href="#" class="button">Browse All</a></li>
-									</ul>
-								</div>
-							</section>
+      <section class="education">
+        <h2>Education</h2>
 
-					</section>
+        <ul class="education-list">
+          <li class="education-item">
+            <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+            </svg>
+            <div class="education-item-header">
+              <img src="assets/companies/ucdavis.png" alt="UC Davis" class="university-logo">
+              <h3>University of California, Davis</h3>
+            </div>
+            <div class="degree-wrapper">
+              <span class="status-indicator status-current"></span>
+              <p class="degree">Master of Science in Electrical & Computer Engineering</p>
+            </div>
+            <p class="duration">Expected: December 2026</p>
+            <p class="description">Specializing in embedded systems and machine learning acceleration with a focus on hardware optimizations for AI applications.</p>
+          </li>
 
-				<!-- Footer -->
-					<section id="footer">
-						<div class="inner">
-							<h2 class="major">Get in touch</h2>
-							<p>I'd love to work on something creative and exciting, so please do contact me if you're interested!</p>
-							<!-- <form method="post" action="#">
-								<div class="fields">
-									<div class="field">
-										<label for="name">Name</label>
-										<input type="text" name="name" id="name" />
-									</div>
-									<div class="field">
-										<label for="email">Email</label>
-										<input type="email" name="email" id="email" />
-									</div>
-									<div class="field">
-										<label for="message">Message</label>
-										<textarea name="message" id="message" rows="4"></textarea>
-									</div>
-								</div>
-								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
-								</ul>
-							</form> -->
-							<ul class="contact">
-								<!-- <li class="icon solid fa-home">
-									Untitled Inc<br />
-									1234 Somewhere Road Suite #2894<br />
-									Nashville, TN 00000-0000
-								</li> -->
-								<li class="icon solid fa-phone">(925) 922-7446</li>
-								<li class="icon solid fa-envelope"><a href="krajasekaran@ucmerced.edu">krajasekaran@ucmerced.edu</a></li>
-								<!-- <li class="icon brands fa-twitter"><a href="#">twitter.com/untitled-tld</a></li>
-								<li class="icon brands fa-facebook-f"><a href="#">facebook.com/untitled-tld</a></li>
-								<li class="icon brands fa-instagram"><a href="#">instagram.com/untitled-tld</a></li> -->
-							</ul>
-							<ul class="copyright">
-								<!-- <li>&copy; Untitled Inc. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li> -->
-							</ul>
-						</div>
-					</section>
+          <li class="education-item">
+            <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+            </svg>
+            <div class="education-item-header">
+              <img src="assets/companies/ucmerced.png" alt="UC Merced" class="university-logo">
+              <h3>University of California, Merced</h3>
+            </div>
+            <div class="degree-wrapper">
+              <span class="status-indicator status-completed"></span>
+              <p class="degree">Bachelor of Science in Computer Science & Engineering</p>
+            </div>
+            <p class="duration">Graduated: December 2024</p>
+            <p class="description">Relevant coursework: Data Structures, Algorithm Analysis, Operating Systems, Artificial Intelligence, Statistics in R, Database Systems, Mobile Development. Active member of the Association for Computing Machinery and Google Developer Student Club.</p>
+          </li>
+        </ul>
+      </section>
 
-			</div>
+      <section class="projects">
+        <h2>Projects</h2>
+        <a href="https://github.com/kavinrajasekaran" class="view-more" target="_blank">View all projects on GitHub→</a>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+        <div class="project-grid">
+          <div class="project-card">
+            <div class="project-cover" style="background-image: url('assets/pdfgpt-cover.png')"></div>
+            <div class="project-info">
+              <h3>pdfGPT</h3>
+              <p class="project-type">OSS</p>
+              <div class="project-tech">
+                <img src="assets/tech/python.svg" alt="Python" title="Python">
+                <img src="assets/tech/openai.svg" alt="OpenAI" title="OpenAI">
+                <img src="assets/tech/tesseract.svg" alt="Tesseract" title="Tesseract">
+              </div>
+              <p class="project-description">Summarize PDFs with AI vision models</p>
+              <a href="https://github.com/kavinrajasekaran/pdfgpt" target="_blank" class="project-link">GitHub</a>
+            </div>
+          </div>
 
-	</body>
-</html>
+          <div class="project-card">
+            <div class="project-cover" style="background-image: url('assets/restroom-cover.png')"></div>
+            <div class="project-info">
+              <h3>Restroom Locator</h3>
+              <p class="project-type">OSS</p>
+              <div class="project-tech">
+                <img src="assets/tech/swift.svg" alt="Swift" title="Swift">
+                <img src="assets/tech/corelocation.svg" alt="Core Location" title="Core Location">
+                <img src="assets/tech/mapkit.svg" alt="MapKit" title="MapKit">
+              </div>
+              <p class="project-description">Find nearby restrooms with access codes</p>
+              <a href="https://github.com/kavinrajasekaran/Restroom-Locator" target="_blank" class="project-link">GitHub</a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-cover" style="background-image: url('assets/scheduler-cover.png')"></div>
+            <div class="project-info">
+              <h3>UC Merced Course Scheduler</h3>
+              <p class="project-type">OSS</p>
+              <div class="project-tech">
+                <img src="assets/tech/python.svg" alt="Python" title="Python">
+                <img src="assets/tech/sql.svg" alt="SQL" title="SQL">
+                <img src="assets/tech/budibase.svg" alt="Budibase" title="Budibase">
+              </div>
+              <p class="project-description">Course planning tool for UC Merced students</p>
+              <a href="https://github.com/Insainian/UCM-Course-Stats" target="_blank" class="project-link">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="discord-card">
+        <p>Discord user information</p>
+        <p class="discord-note">Click above to open my profile in Discord!</p>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2025 Kavin Rajasekaran</p>
+    </footer>
+    <!-- Last updated: January 2025 -->
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html> 
