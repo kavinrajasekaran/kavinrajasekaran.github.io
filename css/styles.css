@@ -304,8 +304,9 @@ h2 {
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 220px));
   gap: 1.25rem;
+  justify-content: center;
 }
 
 .project-card {
@@ -546,7 +547,11 @@ footer {
     font-size: 1.25rem;
   }
   
-  .project-grid,
+  .project-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 200px));
+    gap: 1rem;
+  }
+  
   .gems-grid {
     grid-template-columns: 1fr;
   }
@@ -559,11 +564,5 @@ footer {
   
   nav ul {
     gap: 1rem;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1100px) {
-  .project-grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 } 
