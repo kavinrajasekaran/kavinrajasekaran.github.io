@@ -1,0 +1,75 @@
+<svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="restroomGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#155e75;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0891b2;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="restroomGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <rect width="400" height="200" fill="url(#restroomGradient)"/>
+  <rect width="400" height="200" fill="url(#restroomGlow)"/>
+  
+  <!-- iPhone/Mobile device frame -->
+  <g transform="translate(80, 30)">
+    <rect x="0" y="0" width="80" height="140" rx="15" fill="#1f2937" stroke="#374151" stroke-width="2"/>
+    <rect x="5" y="15" width="70" height="110" rx="8" fill="#f8fafc"/>
+    
+    <!-- Map interface -->
+    <rect x="5" y="15" width="70" height="110" rx="8" fill="#3b82f6" opacity="0.2"/>
+    
+    <!-- Map markers -->
+    <circle cx="25" cy="45" r="4" fill="#ef4444"/>
+    <circle cx="55" cy="70" r="4" fill="#10b981"/>
+    <circle cx="35" cy="85" r="4" fill="#f59e0b"/>
+    <circle cx="50" cy="55" r="4" fill="#8b5cf6"/>
+    
+    <!-- Current location (center) -->
+    <circle cx="40" cy="70" r="6" fill="#06b6d4" stroke="white" stroke-width="2"/>
+    <circle cx="40" cy="70" r="2" fill="white"/>
+  </g>
+  
+  <!-- Location pin (large) -->
+  <g transform="translate(200, 40)">
+    <path d="M 15 10 Q 25 0 35 10 Q 40 15 35 25 L 25 45 L 15 25 Q 10 15 15 10 Z" 
+          fill="#ef4444" stroke="#dc2626" stroke-width="2"/>
+    <circle cx="25" cy="18" r="6" fill="white"/>
+    <text x="25" y="22" text-anchor="middle" fill="#ef4444" font-family="Arial, sans-serif" font-size="8" font-weight="bold">🚻</text>
+  </g>
+  
+  <!-- Swift/iOS logo -->
+  <g transform="translate(280, 50)">
+    <circle cx="20" cy="20" r="18" fill="#f97316" stroke="#ea580c" stroke-width="2"/>
+    <path d="M 12 12 Q 20 8 28 12 Q 32 16 28 24 Q 20 28 12 24 Q 8 20 12 12 Z" 
+          fill="white"/>
+    <text x="20" y="24" text-anchor="middle" fill="#f97316" font-family="Arial, sans-serif" font-size="10" font-weight="bold">iOS</text>
+  </g>
+  
+  <!-- Map grid lines -->
+  <g transform="translate(320, 60)" opacity="0.3">
+    <line x1="0" y1="0" x2="60" y2="0" stroke="#10b981" stroke-width="1"/>
+    <line x1="0" y1="15" x2="60" y2="15" stroke="#10b981" stroke-width="1"/>
+    <line x1="0" y1="30" x2="60" y2="30" stroke="#10b981" stroke-width="1"/>
+    <line x1="0" y1="0" x2="0" y2="30" stroke="#10b981" stroke-width="1"/>
+    <line x1="20" y1="0" x2="20" y2="30" stroke="#10b981" stroke-width="1"/>
+    <line x1="40" y1="0" x2="40" y2="30" stroke="#10b981" stroke-width="1"/>
+    <line x1="60" y1="0" x2="60" y2="30" stroke="#10b981" stroke-width="1"/>
+  </g>
+  
+  <!-- Distance indicators -->
+  <g transform="translate(250, 120)">
+    <rect x="0" y="0" width="40" height="15" rx="7" fill="#10b981" opacity="0.8"/>
+    <text x="20" y="10" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="8">0.2 mi</text>
+    
+    <rect x="50" y="0" width="40" height="15" rx="7" fill="#f59e0b" opacity="0.8"/>
+    <text x="70" y="10" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="8">0.5 mi</text>
+  </g>
+  
+  <!-- Title -->
+  <text x="200" y="165" text-anchor="middle" fill="#f1f5f9" font-family="Arial, sans-serif" font-size="16" font-weight="bold">Restroom Locator</text>
+  <text x="200" y="185" text-anchor="middle" fill="#94a3b8" font-family="Arial, sans-serif" font-size="12">Find Nearby Facilities</text>
+</svg>
