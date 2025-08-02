@@ -177,7 +177,9 @@ h1 {
 }
 
 .social-links a {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.4rem 0.8rem;
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
@@ -190,6 +192,10 @@ h1 {
 .social-links a:hover {
   background-color: var(--hover-bg);
   text-decoration: none;
+}
+
+.social-links a i {
+  font-size: 0.9rem;
 }
 
 /* Experience and Education Sections */
