@@ -271,9 +271,19 @@
     </main>
 
     <footer>
-      <p>© 2025 Kavin Rajasekaran</p>
+      <p>© 2025 Kavin Rajasekaran · Visits <span id="views">0</span></p>
     </footer>
     <!-- Last updated: January 2025 -->
   </div>
+
+  <script>
+    // Total site counter using CountAPI
+    // Namespace kavinrajasekaran.dev and key index
+    const el = document.getElementById('views');
+    fetch('https://api.countapi.xyz/hit/kavinrajasekaran.dev/index', { method: 'GET' })
+      .then(r => r.json())
+      .then(d => { if (el && typeof d.value === 'number') el.textContent = d.value.toString(); })
+      .catch(() => { if (el) el.textContent = 'n/a'; });
+  </script>
 </body>
-</html> 
+</html>
