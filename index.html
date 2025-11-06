@@ -277,13 +277,18 @@
   </div>
 
   <script>
-    // Total site counter using CountAPI
-    // Namespace kavinrajasekaran.dev and key index
     const el = document.getElementById('views');
-    fetch('https://api.countapi.xyz/hit/kavinrajasekaran.dev/index', { method: 'GET' })
+    const ns = 'kavinrajasekaran.dev';
+    const key = (location.pathname === '/' ? 'index' : location.pathname).replace(/[^a-z0-9/_-]/gi, '_');
+  
+    fetch(`https://api.counterapi.dev/v1/${encodeURIComponent(ns)}/${encodeURIComponent(key)}/up`)
       .then(r => r.json())
-      .then(d => { if (el && typeof d.value === 'number') el.textContent = d.value.toString(); })
-      .catch(() => { if (el) el.textContent = 'n/a'; });
+      .then(d => {
+        const n = d.count;
+        el.textContent = Number.isFinite(n) ? String(n) : 'n/a';
+      })
+      .catch(() => { el.textContent = 'n/a'; });
   </script>
+  
 </body>
 </html>
