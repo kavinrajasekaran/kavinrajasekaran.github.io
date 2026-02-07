@@ -1,108 +1,171 @@
 /*
-  styles.css
-
-  Description:
-  This stylesheet defines the visual appearance for kavinrajasekaran.dev.
-  It includes definitions for light and dark modes, typography, layout,
-  and component-specific styles for all pages on the site.
+  Liquid Glass Design System
+  Apple-inspired aesthetic for kavinrajasekaran.dev
 
   Table of Contents:
-  1. Font Imports
-  2. CSS Variables (Light & Dark Modes)
-  3. Base & Typography Styles
-  4. Layout & Container
-  5. Header & Navigation
-  6. Hero Section
-  7. Common Section Styles
-  8. Experience & Education Sections
-  9. Projects Section
-  10. Publications Page
-  11. Blog Page
-  12. Footer
-  13. Responsive Design
+  1.  Font Imports
+  2.  CSS Custom Properties (Light & Dark)
+  3.  Base & Typography
+  4.  Animated Background Mesh
+  5.  Layout & Container
+  6.  Floating Glass Header
+  7.  Hero Section
+  8.  Common Section Styles
+  9.  Experience & Education (Glass Timeline)
+  10. Projects Section
+  11. Publications Page
+  12. Blog Page
+  13. Footer
+  14. Glass Light-Follow Effect
+  15. Fade-In Animations
+  16. Accessibility (Reduced Motion)
+  17. Responsive Design
 */
 
-/* 1. Font Imports */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* ============================================================
+   1. Font Imports
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-/* 2. CSS Variables */
+/* ============================================================
+   2. CSS Custom Properties
+   ============================================================ */
 
 /* Light Mode (Default) */
 :root {
-  --bg-color: #f8f9fa;
-  --bg-secondary-color: #ffffff;
-  --text-color: #212529;
-  --text-secondary: #6c757d;
-  --accent-color: #0d6efd;
-  --accent-color-hover: #0b5ed7;
-  --border-color: #dee2e6;
-  --card-bg: #ffffff;
-  --hover-bg: #f1f3f5;
-  --shadow-color: rgba(0, 0, 0, 0.05);
+  /* Page Background */
+  --bg-primary: #f2f2f7;
+  --bg-mesh-1: rgba(120, 85, 255, 0.30);
+  --bg-mesh-2: rgba(255, 100, 150, 0.25);
+  --bg-mesh-3: rgba(64, 196, 255, 0.25);
+  --bg-mesh-4: rgba(255, 185, 60, 0.20);
 
-  --status-current: #0d6efd;
-  --status-future: #6f42c1;
-  --status-completed: #198754;
+  /* Glass Properties */
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-bg-hover: rgba(255, 255, 255, 0.60);
+  --glass-bg-intense: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.60);
+  --glass-border-subtle: rgba(255, 255, 255, 0.35);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  --glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.10);
+  --glass-highlight: rgba(255, 255, 255, 0.70);
+  --glass-blur: 24px;
+  --glass-saturate: 180%;
+
+  /* Typography */
+  --text-primary: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --text-tertiary: #86868b;
+
+  /* Accent */
+  --accent: #0071e3;
+  --accent-hover: #0077ed;
+  --accent-light: rgba(0, 113, 227, 0.10);
+
+  /* Layout */
+  --card-radius: 20px;
+  --pill-radius: 100px;
+  --border-color: rgba(0, 0, 0, 0.10);
+
+  /* Nav tab pill */
+  --tab-active-bg: rgba(0, 0, 0, 0.07);
+  --tab-hover-bg: rgba(0, 0, 0, 0.04);
+
+  /* Status */
+  --status-current: #0071e3;
+  --status-future: #bf5af2;
+  --status-completed: #34c759;
+
+  /* Mouse-follow highlight */
+  --highlight-color: rgba(255, 255, 255, 0.07);
 }
 
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-color: #121212;
-    --bg-secondary-color: #1c1c1c;
-    --text-color: #e9ecef;
-    --text-secondary: #adb5bd;
-    --accent-color: #0d6efd;
-    --accent-color-hover: #3c87fd;
-    --border-color: #343a40;
-    --card-bg: #1c1c1c;
-    --hover-bg: #2d2d2d;
-    --shadow-color: rgba(0, 0, 0, 0.2);
+    --bg-primary: #000000;
+    --bg-mesh-1: rgba(90, 50, 255, 0.20);
+    --bg-mesh-2: rgba(255, 55, 95, 0.15);
+    --bg-mesh-3: rgba(10, 132, 255, 0.18);
+    --bg-mesh-4: rgba(255, 159, 10, 0.12);
 
-    --status-current: #0d6efd;
-    --status-future: #8a63d2;
-    --status-completed: #20c997;
+    --glass-bg: rgba(38, 38, 40, 0.55);
+    --glass-bg-hover: rgba(54, 54, 56, 0.65);
+    --glass-bg-intense: rgba(44, 44, 46, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.10);
+    --glass-border-subtle: rgba(255, 255, 255, 0.06);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    --glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.35);
+    --glass-highlight: rgba(255, 255, 255, 0.06);
+
+    --text-primary: #f5f5f7;
+    --text-secondary: #a1a1a6;
+    --text-tertiary: #6e6e73;
+
+    --accent: #2997ff;
+    --accent-hover: #40a9ff;
+    --accent-light: rgba(41, 151, 255, 0.15);
+
+    --border-color: rgba(255, 255, 255, 0.08);
+
+    --tab-active-bg: rgba(255, 255, 255, 0.10);
+    --tab-hover-bg: rgba(255, 255, 255, 0.06);
+
+    --highlight-color: rgba(255, 255, 255, 0.04);
   }
 }
 
-/* 3. Base & Typography Styles */
-* {
+/* ============================================================
+   3. Base & Typography
+   ============================================================ */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html {
+  background-color: var(--bg-primary);
+}
+
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  line-height: 1.7;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display',
+    'SF Pro Text', system-ui, sans-serif;
+  background: transparent;
+  color: var(--text-primary);
+  line-height: 1.6;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 h1, h2, h3 {
   font-weight: 700;
-  line-height: 1.3;
-  color: var(--text-color);
+  line-height: 1.2;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
 }
 
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 2.75rem;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  margin-bottom: 0.75rem;
 }
 
 h2 {
-  font-size: 1.75rem;
-  margin-bottom: 2rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--border-color);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
 }
 
 h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
 p {
@@ -111,43 +174,90 @@ p {
 }
 
 a {
-  color: var(--accent-color);
+  color: var(--accent);
   text-decoration: none;
-  transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease;
 }
 
 a:hover {
-  color: var(--accent-color-hover);
-  text-decoration: underline;
+  color: var(--accent-hover);
 }
 
-/* 4. Layout & Container */
+/* ============================================================
+   4. Animated Background Mesh
+   ============================================================ */
+body::before {
+  content: '';
+  position: fixed;
+  top: -20%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 20% 30%, var(--bg-mesh-1) 0%, transparent 50%),
+    radial-gradient(ellipse at 78% 15%, var(--bg-mesh-2) 0%, transparent 45%),
+    radial-gradient(ellipse at 35% 78%, var(--bg-mesh-3) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 65%, var(--bg-mesh-4) 0%, transparent 40%);
+  animation: mesh-drift 50s ease-in-out infinite alternate;
+  pointer-events: none;
+  will-change: transform;
+}
+
+@keyframes mesh-drift {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(5%, -3%) rotate(2deg); }
+}
+
+/* ============================================================
+   5. Layout & Container
+   ============================================================ */
 .container {
   max-width: 960px;
   margin: 0 auto;
-  padding: 3rem 1.5rem;
+  padding: 2rem 1.5rem;
+  position: relative;
 }
 
-/* 5. Header & Navigation */
+/* ============================================================
+   6. Floating Glass Header
+   ============================================================ */
 header {
+  position: sticky;
+  top: 1rem;
+  z-index: 100;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 4rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border-color);
+  padding: 0.55rem 0.55rem 0.55rem 1.25rem;
+  margin-bottom: 3rem;
+
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--pill-radius);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+header.scrolled {
+  background: var(--glass-bg-intense);
+  box-shadow: var(--glass-shadow-lg), inset 0 1px 0 var(--glass-highlight);
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.65rem;
 }
 
 .logo a {
-  color: var(--text-color);
+  color: var(--text-primary);
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
 }
 
 .logo a:hover {
@@ -155,115 +265,128 @@ header {
 }
 
 .profile-pic-small {
-  width: 48px;
-  height: 48px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--border-color);
+  border: 2px solid var(--glass-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 nav ul {
   display: flex;
   list-style: none;
-  gap: 1.5rem;
+  gap: 0.25rem;
 }
 
 nav a {
   color: var(--text-secondary);
   font-weight: 500;
-  font-size: 1rem;
-  padding: 0.5rem 0;
-  border-bottom: 2px solid transparent;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  font-size: 0.95rem;
+  padding: 0.4rem 1rem;
+  border-radius: var(--pill-radius);
+  border: none;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
 nav a:hover {
-    color: var(--text-color);
-    text-decoration: none;
+  background: var(--tab-hover-bg);
+  color: var(--text-primary);
+  text-decoration: none;
 }
 
 nav a.active {
-  color: var(--text-color);
+  background: var(--tab-active-bg);
+  color: var(--text-primary);
   font-weight: 600;
-  border-bottom: 2px solid var(--accent-color);
+  border: none;
+  box-shadow: inset 0 1px 0 var(--glass-highlight);
 }
 
-/* 6. Hero Section */
+/* ============================================================
+   7. Hero Section
+   ============================================================ */
 .hero {
   text-align: center;
   margin-bottom: 4rem;
-}
-
-h1 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 0.5rem;
-  line-height: 1.2;
+  padding-top: 1rem;
 }
 
 .subtitle {
   color: var(--text-secondary);
   margin-bottom: 1.5rem;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
+  font-weight: 400;
 }
 
 .bio {
-    max-width: 600px;
-    margin: 0 auto 2rem auto;
+  max-width: 620px;
+  margin: 0 auto 2rem auto;
 }
 
 .bio p {
   margin-bottom: 1rem;
   font-size: 1rem;
-  color: var(--text-color);
+  color: var(--text-primary);
+  line-height: 1.7;
 }
 
 .social-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.65rem;
   margin-top: 1.5rem;
+  justify-content: center;
 }
 
 .social-links a {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  color: var(--text-color);
+  padding: 0.5rem 1.15rem;
+
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(16px) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--pill-radius);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+
+  color: var(--text-primary);
   font-size: 0.9rem;
   font-weight: 500;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .social-links a:hover {
-  background-color: var(--hover-bg);
-  text-decoration: none;
+  background: var(--glass-bg-hover);
   transform: translateY(-2px);
+  box-shadow: var(--glass-shadow-lg), inset 0 1px 0 var(--glass-highlight);
+  text-decoration: none;
 }
 
 .social-links a i {
   font-size: 1rem;
   color: var(--text-secondary);
+  transition: color 0.3s ease;
 }
 
-/* 7. Common Section Styles */
+.social-links a:hover i {
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   8. Common Section Styles
+   ============================================================ */
 section {
-    margin-bottom: 4rem;
+  margin-bottom: 4rem;
 }
 
-/* 8. Experience and Education Sections */
+/* ============================================================
+   9. Experience & Education (Glass Timeline)
+   ============================================================ */
 .experience, .education {
   margin-bottom: 3rem;
-}
-
-h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
 }
 
 .experience-list, .education-list {
@@ -274,28 +397,42 @@ h2 {
 
 .experience-item, .education-item {
   position: relative;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   padding: 1.5rem;
-  border-radius: 8px;
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  transition: box-shadow 0.2s ease;
+
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .experience-item:hover, .education-item:hover {
-    box-shadow: 0 4px 12px var(--shadow-color);
+  background: var(--glass-bg-hover);
+  box-shadow: var(--glass-shadow-lg), inset 0 1px 0 var(--glass-highlight);
+  transform: translateY(-2px);
 }
 
 .experience-item::before, .education-item::before {
-    content: '';
-    position: absolute;
-    left: -1.95rem;
-    top: 1.5rem;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: var(--accent-color);
-    border: 2px solid var(--bg-color);
+  content: '';
+  position: absolute;
+  left: -1.95rem;
+  top: 1.5rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg-primary);
+  box-shadow: 0 0 0 2px var(--border-color), 0 0 10px rgba(0, 113, 227, 0.20);
+}
+
+/* Hide toggle icon — description always visible */
+.experience-item .toggle-icon,
+.education-item .toggle-icon {
+  display: none;
 }
 
 .experience-item-header, .education-item-header {
@@ -309,16 +446,12 @@ h2 {
 .company-logo, .university-logo {
   width: 40px;
   height: 40px;
-  border-radius: 8px;
+  border-radius: 12px;
   object-fit: contain;
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.90);
   padding: 4px;
-  border: 1px solid var(--border-color);
-}
-
-/* Hide toggle icon, description is always visible */
-.experience-item .toggle-icon, .education-item .toggle-icon {
-  display: none;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
 .status-indicator {
@@ -328,21 +461,10 @@ h2 {
   border-radius: 50%;
 }
 
-.status-current {
-  background-color: var(--status-current);
-}
-
-.status-future {
-  background-color: var(--status-future);
-}
-
-.status-completed {
-  background-color: var(--status-completed);
-}
-
-.status-past {
-  display: none;
-}
+.status-current  { background-color: var(--status-current); }
+.status-future   { background-color: var(--status-future); }
+.status-completed { background-color: var(--status-completed); }
+.status-past     { display: none; }
 
 .experience-item h3, .education-item h3 {
   font-size: 1.1rem;
@@ -358,16 +480,18 @@ h2 {
 }
 
 .position-wrapper::before {
-  content: "|";
-  color: var(--text-secondary);
-  margin-right: 0.5rem;
+  content: "·";
+  color: var(--text-tertiary);
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-right: 0.25rem;
 }
 
 .position, .degree {
   font-weight: 500;
   margin: 0;
   font-size: 1rem;
-  color: var(--text-color);
+  color: var(--text-primary);
 }
 
 .duration-wrapper {
@@ -379,7 +503,7 @@ h2 {
 
 .duration {
   font-size: 0.9rem;
-  color: var(--text-secondary);
+  color: var(--text-tertiary);
   margin: 0;
 }
 
@@ -387,11 +511,14 @@ h2 {
   font-size: 0.95rem;
   color: var(--text-secondary);
   margin-top: 1rem;
-  margin-left: 0; /* Reset margin */
-  display: block; /* Always display */
+  margin-left: 0;
+  display: block;
+  line-height: 1.65;
 }
 
-/* 9. Projects Section */
+/* ============================================================
+   10. Projects Section
+   ============================================================ */
 .projects {
   margin-bottom: 3rem;
 }
@@ -405,32 +532,39 @@ h2 {
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
 }
 
 .project-card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
+  position: relative;
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+
   display: flex;
   flex-direction: column;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px var(--shadow-color);
+  background: var(--glass-bg-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--glass-shadow-lg), inset 0 1px 0 var(--glass-highlight);
 }
 
 .project-cover {
   width: 100%;
   aspect-ratio: 16 / 9;
-  background-color: rgba(255, 255, 255, 0.02);
-  border-bottom: 1px solid var(--border-color);
   background-size: cover;
   background-position: center;
+  border-bottom: 1px solid var(--glass-border-subtle);
+  background-color: rgba(128, 128, 128, 0.05);
 }
 
 .project-info {
@@ -441,16 +575,16 @@ h2 {
 }
 
 .project-info h3 {
-  font-size: 1.1rem;
-  margin-bottom: 0.25rem;
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
 }
 
 .project-type {
   display: inline-block;
-  padding: 0.2rem 0.5rem;
-  background-color: var(--accent-color);
+  padding: 0.2rem 0.6rem;
+  background: var(--accent);
   color: #fff;
-  border-radius: 999px;
+  border-radius: var(--pill-radius);
   font-size: 0.75rem;
   font-weight: 500;
   margin-bottom: 0.75rem;
@@ -464,8 +598,8 @@ h2 {
 }
 
 .project-tech img {
-  height: 28px;
-  width: 28px;
+  height: 26px;
+  width: 26px;
   object-fit: contain;
 }
 
@@ -474,6 +608,7 @@ h2 {
   font-size: 0.9rem;
   margin-bottom: 1rem;
   flex-grow: 1;
+  line-height: 1.55;
 }
 
 .project-link {
@@ -483,24 +618,35 @@ h2 {
   margin-top: auto;
 }
 
-/* 10. Publications Page */
+/* ============================================================
+   11. Publications Page
+   ============================================================ */
 .publication-item {
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  background-color: var(--card-bg);
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  transition: box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .publication-item:hover {
-    box-shadow: 0 4px 12px var(--shadow-color);
+  background: var(--glass-bg-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--glass-shadow-lg), inset 0 1px 0 var(--glass-highlight);
 }
 
 .publication-item h3 {
-  color: var(--text-color);
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 600;
 }
 
@@ -511,7 +657,7 @@ h2 {
 }
 
 .publication-venue {
-  color: var(--text-color);
+  color: var(--text-primary);
   font-style: italic;
   margin-bottom: 1rem;
   font-size: 0.95rem;
@@ -519,10 +665,10 @@ h2 {
 
 .publication-status {
   display: inline-block;
-  padding: 0.25rem 0.75rem;
-  background-color: var(--status-completed);
+  padding: 0.25rem 0.85rem;
+  background: var(--status-completed);
   color: white;
-  border-radius: 999px;
+  border-radius: var(--pill-radius);
   font-size: 0.8rem;
   font-weight: 500;
   margin-bottom: 1rem;
@@ -530,79 +676,76 @@ h2 {
 
 .publication-description {
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.65;
   margin-bottom: 1rem;
 }
 
 .publication-links {
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
   margin-top: 1rem;
 }
 
 .publication-link {
-  padding: 0.5rem 1rem;
-  background-color: var(--accent-color);
+  padding: 0.5rem 1.15rem;
+  background: var(--accent);
   color: white;
-  border-radius: 8px;
+  border-radius: var(--pill-radius);
   font-size: 0.9rem;
   font-weight: 500;
-  text-decoration: none;
-  transition: background-color 0.2s ease;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 113, 227, 0.25);
 }
 
 .publication-link:hover {
-  background-color: var(--accent-color-hover);
+  background: var(--accent-hover);
+  color: white;
   text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 113, 227, 0.35);
 }
 
-.publication-link-placeholder {
-  padding: 0.5rem 1rem;
-  background-color: var(--text-secondary);
-  color: var(--bg-color);
-  border-radius: 4px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  opacity: 0.6;
-}
-
-.publications-placeholder {
-  margin-top: 2rem;
-}
-
-.publications-placeholder h2 {
-  color: var(--text-color);
-  margin-bottom: 0.5rem;
-  margin-top: 2rem;
-  font-size: 1.25rem;
-}
-
+.publication-link-placeholder,
+.publications-placeholder,
 .placeholder-text {
-  color: var(--text-secondary);
-  font-style: italic;
-  margin-bottom: 1.5rem;
+  display: none;
 }
 
 .research-interests {
-    margin-top: 4rem;
+  margin-top: 4rem;
 }
 
 .interests-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .interest-item {
   padding: 1.5rem;
-  background-color: var(--card-bg);
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.interest-item:hover {
+  background: var(--glass-bg-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--glass-shadow-lg), inset 0 1px 0 var(--glass-highlight);
 }
 
 .interest-item h3 {
-  color: var(--text-color);
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
   font-size: 1.1rem;
   font-weight: 600;
@@ -610,12 +753,13 @@ h2 {
 
 .interest-item p {
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.65;
   font-size: 0.95rem;
 }
 
-
-/* 11. Blog Page */
+/* ============================================================
+   12. Blog Page
+   ============================================================ */
 .blog-posts {
   display: flex;
   flex-direction: column;
@@ -624,29 +768,36 @@ h2 {
 
 .blog-post {
   padding: 2rem;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  background-color: var(--card-bg);
-  transition: box-shadow 0.2s ease;
+
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .blog-post:hover {
-    box-shadow: 0 4px 12px var(--shadow-color);
+  background: var(--glass-bg-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--glass-shadow-lg), inset 0 1px 0 var(--glass-highlight);
 }
 
 .blog-post h2 {
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   margin-bottom: 0.5rem;
   border: none;
   padding: 0;
 }
 
 .blog-post h2 a {
-  color: var(--text-color);
+  color: var(--text-primary);
 }
 
 .post-date {
-  color: var(--text-secondary);
+  color: var(--text-tertiary);
   font-size: 0.9rem;
   margin-bottom: 1rem;
 }
@@ -662,44 +813,246 @@ h2 {
   font-weight: 600;
 }
 
-/* 12. Footer */
+/* ============================================================
+   13. Footer
+   ============================================================ */
 footer {
   margin-top: 4rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border-color);
+  padding: 1.5rem 2rem;
   text-align: center;
-  color: var(--text-secondary);
-  font-size: 0.9rem;
+
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
 }
 
-/* 13. Responsive Design */
+footer p {
+  color: var(--text-tertiary);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* ============================================================
+   14. Glass Light-Follow Effect (mouse tracking)
+   ============================================================ */
+.experience-item::after,
+.education-item::after,
+.project-card::after,
+.publication-item::after,
+.interest-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    var(--highlight-color),
+    transparent 40%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.experience-item:hover::after,
+.education-item:hover::after,
+.project-card:hover::after,
+.publication-item:hover::after,
+.interest-item:hover::after {
+  opacity: 1;
+}
+
+/* ============================================================
+   15. Fade-In Animations
+   ============================================================ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children within fade-in sections */
+.fade-in .experience-item,
+.fade-in .education-item,
+.fade-in .project-card,
+.fade-in .publication-item,
+.fade-in .interest-item {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    background 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fade-in.visible .experience-item,
+.fade-in.visible .education-item,
+.fade-in.visible .project-card,
+.fade-in.visible .publication-item,
+.fade-in.visible .interest-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays are applied via JS and cleaned up after animation
+   to avoid interfering with hover transitions */
+
+/* ============================================================
+   16. Accessibility (Reduced Motion)
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+  }
+
+  .fade-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .fade-in .experience-item,
+  .fade-in .education-item,
+  .fade-in .project-card,
+  .fade-in .publication-item,
+  .fade-in .interest-item {
+    opacity: 1;
+    transform: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================
+   17. Responsive Design
+   ============================================================ */
+
+/* Tablet & small laptops */
 @media (max-width: 768px) {
+  :root {
+    --glass-blur: 18px;
+    --card-radius: 16px;
+  }
+
   .container {
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
   }
 
   h1 {
-    font-size: 2rem;
-  }
-
-  h2 {
-    font-size: 1.5rem;
+    font-size: 2.25rem;
   }
 
   header {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
+    border-radius: var(--card-radius);
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    top: 0.5rem;
     margin-bottom: 2rem;
+  }
+
+  nav a {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .social-links a {
+    padding: 0.45rem 1rem;
+    font-size: 0.85rem;
   }
 
   .project-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+  }
+
+  .experience-item-header,
+  .education-item-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .position-wrapper::before {
+    display: none;
+  }
+
+  .duration-wrapper {
+    margin-left: 0;
   }
 }
 
-/* Remove unused styles */
-.discord-card, .gems-grid, .gem-card, .blog-post-full, .post-header, .post-content, .post-footer, .back-to-blog, .publication-link-placeholder, .publications-placeholder, .placeholder-text {
+/* Mobile phones */
+@media (max-width: 480px) {
+  :root {
+    --glass-blur: 14px;
+    --card-radius: 14px;
+  }
+
+  h1 {
+    font-size: 1.85rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  header {
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: var(--card-radius);
+    padding: 0.75rem 1rem;
+  }
+
+  .social-links a span {
     display: none;
-} 
+  }
+
+  .social-links a {
+    padding: 0.65rem;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    justify-content: center;
+  }
+
+  .social-links a i {
+    font-size: 1.15rem;
+    color: var(--text-primary);
+  }
+
+  .experience-item, .education-item {
+    padding: 1.25rem;
+  }
+
+  .interests-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   Remove unused legacy styles
+   ============================================================ */
+.discord-card,
+.gems-grid,
+.gem-card,
+.blog-post-full,
+.post-header,
+.post-content,
+.post-footer,
+.back-to-blog {
+  display: none;
+}
