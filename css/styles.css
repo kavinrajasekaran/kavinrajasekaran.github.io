@@ -1,6 +1,13 @@
 /*
   Liquid Glass Design System
-  Apple-inspired aesthetic for kavinrajasekaran.dev
+  Apple-style Liquid Glass for kavinrajasekaran.dev
+
+  The liquid glass effect uses a layered approach:
+  1. JS-injected .glass-distortion div captures the backdrop via
+     backdrop-filter and applies SVG feDisplacementMap refraction
+  2. Semi-transparent tint on the distortion layer
+  3. Specular edge highlights via ::after pseudo-element
+  4. Content sits above everything in normal flow
 
   Table of Contents:
   1.  Font Imports
@@ -8,18 +15,19 @@
   3.  Base & Typography
   4.  Animated Background Mesh
   5.  Layout & Container
-  6.  Floating Glass Header
-  7.  Hero Section
-  8.  Common Section Styles
-  9.  Experience & Education (Glass Timeline)
-  10. Projects Section
-  11. Publications Page
-  12. Blog Page
-  13. Footer
-  14. Glass Light-Follow Effect
-  15. Fade-In Animations
-  16. Accessibility (Reduced Motion)
-  17. Responsive Design
+  6.  Glass Distortion Layer
+  7.  Floating Glass Header
+  8.  Hero Section
+  9.  Common Section Styles
+  10. Experience & Education (Glass Timeline)
+  11. Projects Section
+  12. Publications Page
+  13. Blog Page
+  14. Footer
+  15. Glass Specular & Mouse-Follow Effect
+  16. Fade-In Animations
+  17. Accessibility (Reduced Motion)
+  18. Responsive Design
 */
 
 /* ============================================================
@@ -40,17 +48,22 @@
   --bg-mesh-3: rgba(64, 196, 255, 0.25);
   --bg-mesh-4: rgba(255, 185, 60, 0.20);
 
-  /* Glass Properties */
-  --glass-bg: rgba(255, 255, 255, 0.45);
-  --glass-bg-hover: rgba(255, 255, 255, 0.60);
-  --glass-bg-intense: rgba(255, 255, 255, 0.65);
-  --glass-border: rgba(255, 255, 255, 0.60);
-  --glass-border-subtle: rgba(255, 255, 255, 0.35);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
-  --glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.10);
-  --glass-highlight: rgba(255, 255, 255, 0.70);
-  --glass-blur: 24px;
-  --glass-saturate: 180%;
+  /* Glass tint — the semi-transparent overlay on the distortion layer */
+  --glass-tint: rgba(255, 255, 255, 0.12);
+  --glass-tint-hover: rgba(255, 255, 255, 0.20);
+  --glass-tint-intense: rgba(255, 255, 255, 0.28);
+
+  /* Specular highlights */
+  --specular-top: rgba(255, 255, 255, 0.55);
+  --specular-edge: rgba(255, 255, 255, 0.20);
+
+  /* Glass borders */
+  --glass-border: rgba(255, 255, 255, 0.22);
+  --glass-border-subtle: rgba(255, 255, 255, 0.12);
+
+  /* Shadows */
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.12);
 
   /* Typography */
   --text-primary: #1d1d1f;
@@ -89,14 +102,18 @@
     --bg-mesh-3: rgba(10, 132, 255, 0.18);
     --bg-mesh-4: rgba(255, 159, 10, 0.12);
 
-    --glass-bg: rgba(38, 38, 40, 0.55);
-    --glass-bg-hover: rgba(54, 54, 56, 0.65);
-    --glass-bg-intense: rgba(44, 44, 46, 0.75);
-    --glass-border: rgba(255, 255, 255, 0.10);
-    --glass-border-subtle: rgba(255, 255, 255, 0.06);
-    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-    --glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.35);
-    --glass-highlight: rgba(255, 255, 255, 0.06);
+    --glass-tint: rgba(40, 40, 44, 0.30);
+    --glass-tint-hover: rgba(50, 50, 55, 0.40);
+    --glass-tint-intense: rgba(55, 55, 60, 0.50);
+
+    --specular-top: rgba(255, 255, 255, 0.10);
+    --specular-edge: rgba(255, 255, 255, 0.06);
+
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-border-subtle: rgba(255, 255, 255, 0.05);
+
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.30);
+    --glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.40);
 
     --text-primary: #f5f5f7;
     --text-secondary: #a1a1a6;
@@ -220,7 +237,48 @@ body::before {
 }
 
 /* ============================================================
-   6. Floating Glass Header
+   6. Glass Distortion Layer (injected by JS)
+   Captures the backdrop and applies SVG displacement filter
+   to create the liquid glass refraction effect.
+   ============================================================ */
+.glass-distortion {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+
+  /* Capture the backdrop — the 0.5px blur gives a very subtle softening */
+  -webkit-backdrop-filter: blur(0.5px) saturate(1.4) brightness(1.05);
+  backdrop-filter: blur(0.5px) saturate(1.4) brightness(1.05);
+
+  /* Apply SVG displacement to the captured backdrop → liquid refraction */
+  filter: url(#liquid-glass-distort);
+
+  /* Semi-transparent tint overlaying the distorted backdrop.
+     Since this is a uniform color, displacement has no visual effect on it,
+     only the varying backdrop beneath appears warped. */
+  background: var(--glass-tint);
+
+  isolation: isolate;
+}
+
+/* Hover: increase the tint for feedback */
+.experience-item:hover > .glass-distortion,
+.education-item:hover > .glass-distortion,
+.project-card:hover > .glass-distortion,
+.publication-item:hover > .glass-distortion,
+.interest-item:hover > .glass-distortion,
+.blog-post:hover > .glass-distortion {
+  background: var(--glass-tint-hover);
+}
+
+header.scrolled > .glass-distortion {
+  background: var(--glass-tint-intense);
+}
+
+/* ============================================================
+   7. Floating Glass Header
    ============================================================ */
 header {
   position: sticky;
@@ -232,19 +290,23 @@ header {
   padding: 0.55rem 0.55rem 0.55rem 1.25rem;
   margin-bottom: 3rem;
 
-  background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  /* No background — handled by .glass-distortion layer */
+  background: transparent;
   border: 1px solid var(--glass-border);
   border-radius: var(--pill-radius);
-  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+  box-shadow: var(--glass-shadow),
+    inset 0 1.5px 0 0 var(--specular-top),
+    inset 0 0 0 0.5px var(--specular-edge);
 
-  transition: background 0.4s ease, box-shadow 0.4s ease;
+  isolation: isolate;
+  overflow: hidden;
+  transition: box-shadow 0.4s ease;
 }
 
 header.scrolled {
-  background: var(--glass-bg-intense);
-  box-shadow: var(--glass-shadow-lg), inset 0 1px 0 var(--glass-highlight);
+  box-shadow: var(--glass-shadow-lg),
+    inset 0 1.5px 0 0 var(--specular-top),
+    inset 0 0 0 0.5px var(--specular-edge);
 }
 
 .logo {
@@ -300,11 +362,11 @@ nav a.active {
   color: var(--text-primary);
   font-weight: 600;
   border: none;
-  box-shadow: inset 0 1px 0 var(--glass-highlight);
+  box-shadow: inset 0 1px 0 var(--specular-edge);
 }
 
 /* ============================================================
-   7. Hero Section
+   8. Hero Section
    ============================================================ */
 .hero {
   text-align: center;
@@ -340,17 +402,21 @@ nav a.active {
 }
 
 .social-links a {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1.15rem;
 
-  background: var(--glass-bg);
-  backdrop-filter: blur(16px) saturate(var(--glass-saturate));
-  -webkit-backdrop-filter: blur(16px) saturate(var(--glass-saturate));
+  background: transparent;
   border: 1px solid var(--glass-border);
   border-radius: var(--pill-radius);
-  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+  box-shadow: var(--glass-shadow),
+    inset 0 1px 0 0 var(--specular-top),
+    inset 0 0 0 0.5px var(--specular-edge);
+
+  isolation: isolate;
+  overflow: hidden;
 
   color: var(--text-primary);
   font-size: 0.9rem;
@@ -359,9 +425,10 @@ nav a.active {
 }
 
 .social-links a:hover {
-  background: var(--glass-bg-hover);
   transform: translateY(-2px);
-  box-shadow: var(--glass-shadow-lg), inset 0 1px 0 var(--glass-highlight);
+  box-shadow: var(--glass-shadow-lg),
+    inset 0 1.5px 0 0 var(--specular-top),
+    inset 0 0 0 0.5px var(--specular-edge);
   text-decoration: none;
 }
 
@@ -376,14 +443,14 @@ nav a.active {
 }
 
 /* ============================================================
-   8. Common Section Styles
+   9. Common Section Styles
    ============================================================ */
 section {
   margin-bottom: 4rem;
 }
 
 /* ============================================================
-   9. Experience & Education (Glass Timeline)
+   10. Experience & Education (Glass Timeline)
    ============================================================ */
 .experience, .education {
   margin-bottom: 3rem;
@@ -400,22 +467,21 @@ section {
   margin-bottom: 2rem;
   padding: 1.5rem;
 
-  background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  background: transparent;
   border: 1px solid var(--glass-border);
   border-radius: var(--card-radius);
-  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+  box-shadow: var(--glass-shadow);
 
+  isolation: isolate;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .experience-item:hover, .education-item:hover {
-  background: var(--glass-bg-hover);
-  box-shadow: var(--glass-shadow-lg), inset 0 1px 0 var(--glass-highlight);
+  box-shadow: var(--glass-shadow-lg);
   transform: translateY(-2px);
 }
 
+/* Timeline dot — uses ::before, sits outside overflow */
 .experience-item::before, .education-item::before {
   content: '';
   position: absolute;
@@ -427,6 +493,7 @@ section {
   background: var(--accent);
   border: 2px solid var(--bg-primary);
   box-shadow: 0 0 0 2px var(--border-color), 0 0 10px rgba(0, 113, 227, 0.20);
+  z-index: 5;
 }
 
 /* Hide toggle icon — description always visible */
@@ -517,7 +584,7 @@ section {
 }
 
 /* ============================================================
-   10. Projects Section
+   11. Projects Section
    ============================================================ */
 .projects {
   margin-bottom: 3rem;
@@ -540,22 +607,20 @@ section {
   position: relative;
   overflow: hidden;
 
-  background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  background: transparent;
   border: 1px solid var(--glass-border);
   border-radius: var(--card-radius);
-  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+  box-shadow: var(--glass-shadow);
 
+  isolation: isolate;
   display: flex;
   flex-direction: column;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .project-card:hover {
-  background: var(--glass-bg-hover);
   transform: translateY(-4px);
-  box-shadow: var(--glass-shadow-lg), inset 0 1px 0 var(--glass-highlight);
+  box-shadow: var(--glass-shadow-lg);
 }
 
 .project-cover {
@@ -565,6 +630,8 @@ section {
   background-position: center;
   border-bottom: 1px solid var(--glass-border-subtle);
   background-color: rgba(128, 128, 128, 0.05);
+  position: relative;
+  z-index: 1;
 }
 
 .project-info {
@@ -572,6 +639,8 @@ section {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  position: relative;
+  z-index: 1;
 }
 
 .project-info h3 {
@@ -619,7 +688,7 @@ section {
 }
 
 /* ============================================================
-   11. Publications Page
+   12. Publications Page
    ============================================================ */
 .publication-item {
   padding: 1.5rem;
@@ -627,20 +696,18 @@ section {
   position: relative;
   overflow: hidden;
 
-  background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  background: transparent;
   border: 1px solid var(--glass-border);
   border-radius: var(--card-radius);
-  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+  box-shadow: var(--glass-shadow);
 
+  isolation: isolate;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .publication-item:hover {
-  background: var(--glass-bg-hover);
   transform: translateY(-2px);
-  box-shadow: var(--glass-shadow-lg), inset 0 1px 0 var(--glass-highlight);
+  box-shadow: var(--glass-shadow-lg);
 }
 
 .publication-item h3 {
@@ -728,20 +795,18 @@ section {
   position: relative;
   overflow: hidden;
 
-  background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  background: transparent;
   border: 1px solid var(--glass-border);
   border-radius: var(--card-radius);
-  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+  box-shadow: var(--glass-shadow);
 
+  isolation: isolate;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .interest-item:hover {
-  background: var(--glass-bg-hover);
   transform: translateY(-2px);
-  box-shadow: var(--glass-shadow-lg), inset 0 1px 0 var(--glass-highlight);
+  box-shadow: var(--glass-shadow-lg);
 }
 
 .interest-item h3 {
@@ -758,7 +823,7 @@ section {
 }
 
 /* ============================================================
-   12. Blog Page
+   13. Blog Page
    ============================================================ */
 .blog-posts {
   display: flex;
@@ -768,21 +833,21 @@ section {
 
 .blog-post {
   padding: 2rem;
+  position: relative;
+  overflow: hidden;
 
-  background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  background: transparent;
   border: 1px solid var(--glass-border);
   border-radius: var(--card-radius);
-  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+  box-shadow: var(--glass-shadow);
 
+  isolation: isolate;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .blog-post:hover {
-  background: var(--glass-bg-hover);
   transform: translateY(-2px);
-  box-shadow: var(--glass-shadow-lg), inset 0 1px 0 var(--glass-highlight);
+  box-shadow: var(--glass-shadow-lg);
 }
 
 .blog-post h2 {
@@ -814,19 +879,23 @@ section {
 }
 
 /* ============================================================
-   13. Footer
+   14. Footer
    ============================================================ */
 footer {
+  position: relative;
   margin-top: 4rem;
   padding: 1.5rem 2rem;
   text-align: center;
 
-  background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  background: transparent;
   border: 1px solid var(--glass-border);
   border-radius: var(--card-radius);
-  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+  box-shadow: var(--glass-shadow),
+    inset 0 1px 0 0 var(--specular-top),
+    inset 0 0 0 0.5px var(--specular-edge);
+
+  isolation: isolate;
+  overflow: hidden;
 }
 
 footer p {
@@ -836,7 +905,9 @@ footer p {
 }
 
 /* ============================================================
-   14. Glass Light-Follow Effect (mouse tracking)
+   15. Glass Specular & Mouse-Follow Effect
+   Specular box-shadow is always visible; mouse-tracking
+   gradient only appears on hover.
    ============================================================ */
 .experience-item::after,
 .education-item::after,
@@ -847,15 +918,19 @@ footer p {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(
-    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    var(--highlight-color),
-    transparent 40%
-  );
   pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 1;
+  z-index: 2;
+
+  /* Always-visible specular edge highlights */
+  box-shadow:
+    inset 0 1.5px 0 0 var(--specular-top),
+    inset 1px 0 0 0 var(--specular-edge),
+    inset -1px 0 0 0 var(--specular-edge),
+    inset 0 -0.5px 0 0 rgba(255, 255, 255, 0.04);
+
+  /* Mouse-tracking gradient — transparent until hover */
+  background: transparent;
+  transition: background 0.3s ease;
 }
 
 .experience-item:hover::after,
@@ -863,11 +938,15 @@ footer p {
 .project-card:hover::after,
 .publication-item:hover::after,
 .interest-item:hover::after {
-  opacity: 1;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    var(--highlight-color),
+    transparent 40%
+  );
 }
 
 /* ============================================================
-   15. Fade-In Animations
+   16. Fade-In Animations
    ============================================================ */
 .fade-in {
   opacity: 0;
@@ -893,7 +972,6 @@ footer p {
   transition:
     opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
     transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    background 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
     box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -906,11 +984,10 @@ footer p {
   transform: translateY(0);
 }
 
-/* Stagger delays are applied via JS and cleaned up after animation
-   to avoid interfering with hover transitions */
+/* Stagger delays applied via JS and cleaned up after animation */
 
 /* ============================================================
-   16. Accessibility (Reduced Motion)
+   17. Accessibility (Reduced Motion)
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   body::before {
@@ -941,13 +1018,12 @@ footer p {
 }
 
 /* ============================================================
-   17. Responsive Design
+   18. Responsive Design
    ============================================================ */
 
 /* Tablet & small laptops */
 @media (max-width: 768px) {
   :root {
-    --glass-blur: 18px;
     --card-radius: 16px;
   }
 
@@ -998,7 +1074,6 @@ footer p {
 /* Mobile phones */
 @media (max-width: 480px) {
   :root {
-    --glass-blur: 14px;
     --card-radius: 14px;
   }
 
