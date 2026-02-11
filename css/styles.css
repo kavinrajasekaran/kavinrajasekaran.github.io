@@ -243,7 +243,10 @@ body::before {
    ============================================================ */
 .glass-distortion {
   position: absolute;
-  inset: 0;
+  /* Extend 15px beyond parent on all sides so the SVG displacement filter
+     has pixel data to sample from at the edges — the parent's overflow:hidden
+     clips the result cleanly, eliminating edge artifacts. */
+  inset: -15px;
   z-index: -1;
   border-radius: inherit;
   pointer-events: none;
@@ -269,11 +272,16 @@ body::before {
 .project-card:hover > .glass-distortion,
 .publication-item:hover > .glass-distortion,
 .interest-item:hover > .glass-distortion,
-.blog-post:hover > .glass-distortion {
+.blog-post:hover > .glass-distortion,
+nav a:hover > .glass-distortion {
   background: var(--glass-tint-hover);
 }
 
 header.scrolled > .glass-distortion {
+  background: var(--glass-tint-intense);
+}
+
+nav a.active > .glass-distortion {
   background: var(--glass-tint-intense);
 }
 
@@ -342,26 +350,32 @@ nav ul {
 }
 
 nav a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
   color: var(--text-secondary);
   font-weight: 500;
   font-size: 0.95rem;
   padding: 0.4rem 1rem;
   border-radius: var(--pill-radius);
-  border: none;
+  border: 1px solid transparent;
+  background: transparent;
+  isolation: isolate;
+  overflow: hidden;
   transition: background 0.25s ease, color 0.25s ease;
 }
 
 nav a:hover {
-  background: var(--tab-hover-bg);
+  background: transparent;
   color: var(--text-primary);
   text-decoration: none;
 }
 
 nav a.active {
-  background: var(--tab-active-bg);
+  background: transparent;
   color: var(--text-primary);
   font-weight: 600;
-  border: none;
+  border-color: var(--glass-border);
   box-shadow: inset 0 1px 0 var(--specular-edge);
 }
 

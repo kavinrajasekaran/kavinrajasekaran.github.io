@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
      ------------------------------------------------------- */
   const glassSelectors = [
     'header',
+    'nav a',
     '.social-links a',
     '.experience-item',
     '.education-item',
