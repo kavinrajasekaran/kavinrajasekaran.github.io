@@ -9,17 +9,37 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <!-- Liquid Glass SVG Displacement Filter -->
+  <!-- Liquid Glass SVG Displacement Filter (edge-only refraction) -->
   <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;pointer-events:none">
     <defs>
-      <filter id="liquid-glass-distort" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
-        <!-- Generate organic fractal noise -->
-        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.008" numOctaves="2" seed="42" result="noise"/>
-        <!-- Smooth the noise into soft, flowing shapes -->
-        <feGaussianBlur in="noise" stdDeviation="3.5" result="blurred-noise"/>
-        <!-- Displace the captured backdrop pixels using the noise —
-             this creates the liquid glass refraction/warp effect -->
-        <feDisplacementMap in="SourceGraphic" in2="blurred-noise" scale="40" xChannelSelector="R" yChannelSelector="G"/>
+      <filter id="liquid-glass-distort" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+        <!-- 1. Organic noise for the displacement texture -->
+        <feTurbulence type="fractalNoise" baseFrequency="0.015 0.01" numOctaves="2" seed="42" result="noise"/>
+        <feGaussianBlur in="noise" stdDeviation="8" result="soft-noise"/>
+
+        <!-- 2. Build an edge mask (1 at edges/corners, 0 in center) -->
+        <!-- White flood constrained to the element bounds -->
+        <feFlood flood-color="white" flood-opacity="1" x="0%" y="0%" width="100%" height="100%" result="fill"/>
+        <!-- Blur creates a smooth alpha falloff at edges; center stays at 1 -->
+        <feGaussianBlur in="fill" stdDeviation="12" result="center-glow"/>
+        <!-- Copy alpha → RGB so arithmetic can use it, set alpha to 1 -->
+        <feColorMatrix in="center-glow" type="matrix"
+          values="0 0 0 1 0  0 0 0 1 0  0 0 0 1 0  0 0 0 0 1" result="center-rgb"/>
+        <!-- Invert: center(1)→0, edges(0)→1 -->
+        <feComponentTransfer in="center-rgb" result="edge-mask">
+          <feFuncR type="table" tableValues="1 0"/>
+          <feFuncG type="table" tableValues="1 0"/>
+          <feFuncB type="table" tableValues="1 0"/>
+        </feComponentTransfer>
+
+        <!-- 3. Blend: edges → noise displacement, center → 0.5 (no displacement)
+             Formula: mask × (noise − 0.5) + 0.5 -->
+        <feComposite in="soft-noise" in2="edge-mask" operator="arithmetic"
+          k1="1" k2="0" k3="-0.5" k4="0.5" result="edge-displacement"/>
+
+        <!-- 4. Displace the source — only the edges/corners warp -->
+        <feDisplacementMap in="SourceGraphic" in2="edge-displacement" scale="30"
+          xChannelSelector="R" yChannelSelector="G"/>
       </filter>
     </defs>
   </svg>
@@ -56,7 +76,7 @@
             <i class="fab fa-github"></i>
             <span>kavinrajasekaran</span>
           </a>
-          <a href="https://linkedin.com/in/kavin-rajasekaran" target="_blank" title="LinkedIn">
+          <a href="https://www.linkedin.com/in/kavinkraj/" target="_blank" title="LinkedIn">
             <i class="fab fa-linkedin"></i>
             <span>kavin-rajasekaran</span>
           </a>
