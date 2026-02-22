@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,15 +8,15 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="assets/favicon.png">
 </head>
+
 <body>
   <!-- Liquid Glass SVG Displacement Filter (edge-only refraction) -->
   <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;pointer-events:none">
     <defs>
       <filter id="liquid-glass-distort" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
-        <feTurbulence type="fractalNoise" baseFrequency="0.006 0.004" numOctaves="2" seed="42" result="noise"/>
-        <feGaussianBlur in="noise" stdDeviation="22" result="soft-noise"/>
-        <feDisplacementMap in="SourceGraphic" in2="soft-noise" scale="16"
-          xChannelSelector="R" yChannelSelector="G"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.006 0.004" numOctaves="2" seed="42" result="noise" />
+        <feGaussianBlur in="noise" stdDeviation="22" result="soft-noise" />
+        <feDisplacementMap in="SourceGraphic" in2="soft-noise" scale="16" xChannelSelector="R" yChannelSelector="G" />
       </filter>
     </defs>
   </svg>
@@ -30,7 +31,7 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="#" class="active">Research</a></li>
-          <!-- <li><a href="blog.html">Blog</a></li> -->
+          <li><a href="games.html">Games</a></li>
         </ul>
       </nav>
     </header>
@@ -42,35 +43,41 @@
 
         <div class="publications-content">
           <h2>Peer-Reviewed Papers</h2>
-          
+
           <article class="publication-item">
             <h3>Exploring Parallel Implementation of SPHINCS+ using Advanced Vector Extensions (AVX) Sets</h3>
             <p class="publication-authors">Yaoyun Zhou, <strong>Kavin Rajasekaran</strong>, Qian Wang</p>
             <p class="publication-venue">25th International Symposium on Quality Electronic Design (ISQED), 2025</p>
             <p class="publication-status">Published</p>
             <p class="publication-description">
-              This paper presents a comprehensive study on parallelizing SPHINCS+ digital signature algorithms using AVX512 instruction sets. 
-              Our implementation achieved a 56% runtime reduction over the AVX2 baseline, demonstrating significant performance improvements 
+              This paper presents a comprehensive study on parallelizing SPHINCS+ digital signature algorithms using
+              AVX512 instruction sets.
+              Our implementation achieved a 56% runtime reduction over the AVX2 baseline, demonstrating significant
+              performance improvements
               for post-quantum cryptographic operations.
             </p>
             <div class="publication-links">
-              <a href="https://www.isqed.org/English/Archives/2025/Technical_Sessions/88.html" target="_blank" class="publication-link">Conference Page</a>
-              <a href="https://ieeexplore.ieee.org/document/11014474" target="_blank" class="publication-link">IEEE Xplore</a>
+              <a href="https://www.isqed.org/English/Archives/2025/Technical_Sessions/88.html" target="_blank"
+                class="publication-link">Conference Page</a>
+              <a href="https://ieeexplore.ieee.org/document/11014474" target="_blank" class="publication-link">IEEE
+                Xplore</a>
             </div>
           </article>
 
           <h2>Conference Presentations</h2>
-          
+
           <article class="publication-item">
             <h3>Exploring Parallel Implementation of SPHINCS+ using Advanced Vector Extensions (AVX) Sets</h3>
             <p class="publication-authors">Yaoyun Zhou, <strong>Kavin Rajasekaran</strong>, Qian Wang</p>
             <p class="publication-venue">25th International Symposium on Quality Electronic Design (ISQED), 2025</p>
             <p class="publication-description">
-              Presentation on parallel SPHINCS+ implementation using AVX instruction sets, demonstrating significant performance improvements 
+              Presentation on parallel SPHINCS+ implementation using AVX instruction sets, demonstrating significant
+              performance improvements
               for post-quantum cryptographic operations.
             </p>
             <div class="publication-links">
-              <a href="https://www.isqed.org/English/Archives/2025/Technical_Sessions/88.html" target="_blank" class="publication-link">Conference Page</a>
+              <a href="https://www.isqed.org/English/Archives/2025/Technical_Sessions/88.html" target="_blank"
+                class="publication-link">Conference Page</a>
             </div>
           </article>
         </div>
@@ -81,19 +88,23 @@
         <div class="interests-grid">
           <div class="interest-item">
             <h3>Post-Quantum Cryptography</h3>
-            <p>Optimization and implementation of quantum-resistant cryptographic algorithms, particularly SPHINCS+ digital signatures.</p>
+            <p>Optimization and implementation of quantum-resistant cryptographic algorithms, particularly SPHINCS+
+              digital signatures.</p>
           </div>
           <div class="interest-item">
             <h3>Computer Vision</h3>
-            <p>Deep learning approaches for video analysis, amodal completion, and temporal modeling using ConvLSTM architectures.</p>
+            <p>Deep learning approaches for video analysis, amodal completion, and temporal modeling using ConvLSTM
+              architectures.</p>
           </div>
           <div class="interest-item">
             <h3>High-Performance Computing</h3>
-            <p>Parallel algorithm design and optimization using SIMD instruction sets (AVX512) for cryptographic applications.</p>
+            <p>Parallel algorithm design and optimization using SIMD instruction sets (AVX512) for cryptographic
+              applications.</p>
           </div>
           <div class="interest-item">
             <h3>Machine Learning Systems</h3>
-            <p>Efficient implementation of ML models for real-world applications, with focus on edge deployment and optimization.</p>
+            <p>Efficient implementation of ML models for real-world applications, with focus on edge deployment and
+              optimization.</p>
           </div>
         </div>
       </section>
@@ -105,4 +116,5 @@
   </div>
   <script src="js/liquid-glass.js"></script>
 </body>
-</html> 
+
+</html>
