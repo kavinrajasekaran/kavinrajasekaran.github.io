@@ -1,140 +1,25 @@
-/*
-  Liquid Glass Design System
-  Apple-style Liquid Glass for kavinrajasekaran.dev
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;450;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap');
 
-  The liquid glass effect uses a layered approach:
-  1. JS-injected .glass-distortion div captures the backdrop via
-     backdrop-filter and applies SVG feDisplacementMap refraction
-  2. Semi-transparent tint on the distortion layer
-  3. Specular edge highlights via ::after pseudo-element
-  4. Content sits above everything in normal flow
-
-  Table of Contents:
-  1.  Font Imports
-  2.  CSS Custom Properties (Light & Dark)
-  3.  Base & Typography
-  4.  Animated Background Mesh
-  5.  Layout & Container
-  6.  Glass Distortion Layer
-  7.  Floating Glass Header
-  8.  Hero Section
-  9.  Common Section Styles
-  10. Experience & Education (Glass Timeline)
-  11. Projects Section
-  12. Publications Page
-  13. Blog Page
-  14. Footer
-  15. Glass Specular & Mouse-Follow Effect
-  16. Fade-In Animations
-  17. Accessibility (Reduced Motion)
-  18. Responsive Design
-*/
-
-/* ============================================================
-   1. Font Imports
-   ============================================================ */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
-/* ============================================================
-   2. CSS Custom Properties
-   ============================================================ */
-
-/* Light Mode (Default) */
 :root {
-  /* Page Background */
-  --bg-primary: #f2f2f7;
-  --bg-mesh-1: rgba(120, 85, 255, 0.30);
-  --bg-mesh-2: rgba(255, 100, 150, 0.25);
-  --bg-mesh-3: rgba(64, 196, 255, 0.25);
-  --bg-mesh-4: rgba(255, 185, 60, 0.20);
-
-  /* Glass tint — the semi-transparent overlay on the distortion layer */
-  --glass-tint: rgba(255, 255, 255, 0.12);
-  --glass-tint-hover: rgba(255, 255, 255, 0.20);
-  --glass-tint-intense: rgba(255, 255, 255, 0.28);
-
-  /* Specular highlights */
-  --specular-top: rgba(255, 255, 255, 0.55);
-  --specular-edge: rgba(255, 255, 255, 0.20);
-
-  /* Glass borders */
-  --glass-border: rgba(255, 255, 255, 0.22);
-  --glass-border-subtle: rgba(255, 255, 255, 0.12);
-
-  /* Shadows */
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-  --glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.12);
-
-  /* Typography */
-  --text-primary: #1d1d1f;
-  --text-secondary: #6e6e73;
-  --text-tertiary: #86868b;
-
-  /* Accent */
-  --accent: #0071e3;
-  --accent-hover: #0077ed;
-  --accent-light: rgba(0, 113, 227, 0.10);
-
-  /* Layout */
-  --card-radius: 20px;
-  --pill-radius: 100px;
-  --border-color: rgba(0, 0, 0, 0.10);
-
-  /* Nav tab pill */
-  --tab-active-bg: rgba(0, 0, 0, 0.07);
-  --tab-hover-bg: rgba(0, 0, 0, 0.04);
-
-  /* Status */
-  --status-current: #0071e3;
-  --status-future: #bf5af2;
-  --status-completed: #34c759;
-
-  /* Mouse-follow highlight */
-  --highlight-color: rgba(255, 255, 255, 0.07);
+  --bg-primary: #f4f1ea;
+  --bg-secondary: #ebe5d8;
+  --surface: #fbf8f1;
+  --surface-muted: #eee8dc;
+  --text-primary: #1f1d1a;
+  --text-secondary: #5e574f;
+  --text-tertiary: #81786c;
+  --accent: #c15f3c;
+  --accent-hover: #8f3f26;
+  --accent-light: #ead2c5;
+  --border-color: #d8d0c1;
+  --border-strong: #1f1d1a;
+  --status-current: #2f6f60;
+  --status-future: #8c5b98;
+  --status-completed: #6e783a;
+  --radius: 8px;
+  --max-width: 1080px;
 }
 
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: #000000;
-    --bg-mesh-1: rgba(90, 50, 255, 0.20);
-    --bg-mesh-2: rgba(255, 55, 95, 0.15);
-    --bg-mesh-3: rgba(10, 132, 255, 0.18);
-    --bg-mesh-4: rgba(255, 159, 10, 0.12);
-
-    --glass-tint: rgba(40, 40, 44, 0.30);
-    --glass-tint-hover: rgba(50, 50, 55, 0.40);
-    --glass-tint-intense: rgba(55, 55, 60, 0.50);
-
-    --specular-top: rgba(255, 255, 255, 0.10);
-    --specular-edge: rgba(255, 255, 255, 0.06);
-
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-border-subtle: rgba(255, 255, 255, 0.05);
-
-    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.30);
-    --glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.40);
-
-    --text-primary: #f5f5f7;
-    --text-secondary: #a1a1a6;
-    --text-tertiary: #6e6e73;
-
-    --accent: #2997ff;
-    --accent-hover: #40a9ff;
-    --accent-light: rgba(41, 151, 255, 0.15);
-
-    --border-color: rgba(255, 255, 255, 0.08);
-
-    --tab-active-bg: rgba(255, 255, 255, 0.10);
-    --tab-hover-bg: rgba(255, 255, 255, 0.06);
-
-    --highlight-color: rgba(255, 255, 255, 0.04);
-  }
-}
-
-/* ============================================================
-   3. Base & Typography
-   ============================================================ */
 *,
 *::before,
 *::after {
@@ -144,44 +29,70 @@
 }
 
 html {
-  background-color: var(--bg-primary);
+  background: var(--bg-primary);
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display',
-    'SF Pro Text', system-ui, sans-serif;
-  background: transparent;
-  color: var(--text-primary);
-  line-height: 1.6;
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
   overflow-x: hidden;
+  background:
+    linear-gradient(90deg, rgba(31, 29, 26, 0.035) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(31, 29, 26, 0.03) 1px, transparent 1px),
+    var(--bg-primary);
+  background-size: 44px 44px;
+  color: var(--text-primary);
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3 {
-  font-weight: 700;
-  line-height: 1.2;
+.glass-distortion {
+  display: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
   color: var(--text-primary);
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.05;
 }
 
 h1 {
-  font-size: 2.75rem;
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  margin-bottom: 0.75rem;
+  max-width: 860px;
+  margin-bottom: 1rem;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 400;
 }
 
 h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.35rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+h2::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-color);
 }
 
 h3 {
-  font-size: 1.1rem;
+  font-size: 1.18rem;
   font-weight: 600;
 }
 
@@ -191,601 +102,439 @@ p {
 }
 
 a {
-  color: var(--accent);
-  text-decoration: none;
-  transition: color 0.2s ease;
+  color: var(--text-primary);
+  text-decoration-color: rgba(31, 29, 26, 0.35);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease, background 0.2s ease;
 }
 
 a:hover {
   color: var(--accent-hover);
+  text-decoration-color: currentColor;
 }
 
-/* ============================================================
-   4. Animated Background Mesh
-   ============================================================ */
-body::before {
-  content: '';
-  position: fixed;
-  top: -20%;
-  left: -20%;
-  width: 140%;
-  height: 140%;
-  z-index: -1;
-  background:
-    radial-gradient(ellipse at 20% 30%, var(--bg-mesh-1) 0%, transparent 50%),
-    radial-gradient(ellipse at 78% 15%, var(--bg-mesh-2) 0%, transparent 45%),
-    radial-gradient(ellipse at 35% 78%, var(--bg-mesh-3) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 65%, var(--bg-mesh-4) 0%, transparent 40%);
-  animation: mesh-drift 50s ease-in-out infinite alternate;
-  pointer-events: none;
-  will-change: transform;
-}
-
-@keyframes mesh-drift {
-  0%   { transform: translate(0, 0) rotate(0deg); }
-  100% { transform: translate(5%, -3%) rotate(2deg); }
-}
-
-/* ============================================================
-   5. Layout & Container
-   ============================================================ */
 .container {
-  max-width: 960px;
+  max-width: var(--max-width);
   margin: 0 auto;
-  padding: 2rem 1.5rem;
-  position: relative;
+  padding: 1.25rem 1.5rem 2.5rem;
 }
 
-/* ============================================================
-   6. Glass Distortion Layer (injected by JS)
-   Captures the backdrop and applies SVG displacement filter
-   to create the liquid glass refraction effect.
-   ============================================================ */
-.glass-distortion {
-  position: absolute;
-  /* Extend 15px beyond parent on all sides so the SVG displacement filter
-     has pixel data to sample from at the edges — the parent's overflow:hidden
-     clips the result cleanly, eliminating edge artifacts. */
-  inset: -15px;
-  z-index: -1;
-  border-radius: inherit;
-  pointer-events: none;
-
-  /* Capture the backdrop — the 0.5px blur gives a very subtle softening */
-  -webkit-backdrop-filter: blur(0.5px) saturate(1.4) brightness(1.05);
-  backdrop-filter: blur(0.5px) saturate(1.4) brightness(1.05);
-
-  /* Apply SVG displacement to the captured backdrop → liquid refraction */
-  filter: url(#liquid-glass-distort);
-
-  /* Semi-transparent tint overlaying the distorted backdrop.
-     Since this is a uniform color, displacement has no visual effect on it,
-     only the varying backdrop beneath appears warped. */
-  background: var(--glass-tint);
-
-  isolation: isolate;
-}
-
-/* Hover: increase the tint for feedback */
-.experience-item:hover > .glass-distortion,
-.education-item:hover > .glass-distortion,
-.project-card:hover > .glass-distortion,
-.publication-item:hover > .glass-distortion,
-.interest-item:hover > .glass-distortion,
-.blog-post:hover > .glass-distortion,
-nav a:hover > .glass-distortion {
-  background: var(--glass-tint-hover);
-}
-
-header.scrolled > .glass-distortion {
-  background: var(--glass-tint-intense);
-}
-
-nav a.active > .glass-distortion {
-  background: var(--glass-tint-intense);
-}
-
-/* ============================================================
-   7. Floating Glass Header
-   ============================================================ */
 header {
   position: sticky;
-  top: 1rem;
+  top: 0;
   z-index: 100;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0.55rem 0.55rem 0.55rem 1.25rem;
-  margin-bottom: 3rem;
-
-  /* No background — handled by .glass-distortion layer */
-  background: transparent;
-  border: 1px solid var(--glass-border);
-  border-radius: var(--pill-radius);
-  box-shadow: var(--glass-shadow),
-    inset 0 1.5px 0 0 var(--specular-top),
-    inset 0 0 0 0.5px var(--specular-edge);
-
-  isolation: isolate;
-  overflow: hidden;
-  transition: box-shadow 0.4s ease;
-}
-
-header.scrolled {
-  box-shadow: var(--glass-shadow-lg),
-    inset 0 1.5px 0 0 var(--specular-top),
-    inset 0 0 0 0.5px var(--specular-edge);
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 -1.5rem 5rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(244, 241, 234, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.7rem;
 }
 
 .logo a {
   color: var(--text-primary);
-  font-weight: 700;
-  font-size: 1.2rem;
-  letter-spacing: -0.01em;
-}
-
-.logo a:hover {
+  font-size: 1rem;
+  font-weight: 600;
   text-decoration: none;
 }
 
 .profile-pic-small {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border-color);
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--glass-border);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  filter: saturate(0.85) contrast(1.05);
 }
 
 nav ul {
   display: flex;
+  align-items: center;
+  gap: 0.15rem;
   list-style: none;
-  gap: 0.25rem;
 }
 
 nav a {
-  position: relative;
   display: inline-flex;
+  min-height: 36px;
   align-items: center;
-  color: var(--text-secondary);
-  font-weight: 500;
-  font-size: 0.95rem;
-  padding: 0.4rem 1rem;
-  border-radius: var(--pill-radius);
+  padding: 0.45rem 0.8rem;
   border: 1px solid transparent;
-  background: transparent;
-  isolation: isolate;
-  overflow: hidden;
-  transition: background 0.25s ease, color 0.25s ease;
-}
-
-nav a:hover {
-  background: transparent;
-  color: var(--text-primary);
+  border-radius: 999px;
+  color: var(--text-secondary);
+  font-size: 0.93rem;
+  font-weight: 500;
   text-decoration: none;
 }
 
+nav a:hover,
 nav a.active {
-  background: transparent;
+  border-color: var(--border-color);
+  background: var(--surface);
   color: var(--text-primary);
-  font-weight: 600;
-  border-color: var(--glass-border);
-  box-shadow: inset 0 1px 0 var(--specular-edge);
 }
 
-/* ============================================================
-   8. Hero Section
-   ============================================================ */
+main {
+  display: block;
+}
+
+section {
+  margin-bottom: 5rem;
+}
+
 .hero {
-  text-align: center;
-  margin-bottom: 4rem;
-  padding-top: 1rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 3rem;
+  align-items: end;
+  margin-bottom: 5.5rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.hero h1 {
+  grid-column: 1 / -1;
 }
 
 .subtitle {
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-  font-size: 1.15rem;
+  max-width: 650px;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+  font-size: clamp(1.2rem, 2.4vw, 1.75rem);
   font-weight: 400;
+  line-height: 1.25;
 }
 
 .bio {
   max-width: 620px;
-  margin: 0 auto 2rem auto;
 }
 
 .bio p {
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  color: var(--text-primary);
+  color: var(--text-secondary);
+  font-size: 1.02rem;
   line-height: 1.7;
 }
 
 .social-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.65rem;
-  margin-top: 1.5rem;
-  justify-content: center;
+  display: grid;
+  gap: 0;
+  align-self: stretch;
+  border-top: 1px solid var(--border-color);
 }
 
 .social-links a {
-  position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1.15rem;
-
-  background: transparent;
-  border: 1px solid var(--glass-border);
-  border-radius: var(--pill-radius);
-  box-shadow: var(--glass-shadow),
-    inset 0 1px 0 0 var(--specular-top),
-    inset 0 0 0 0.5px var(--specular-edge);
-
-  isolation: isolate;
-  overflow: hidden;
-
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 0.95rem 0;
+  border-bottom: 1px solid var(--border-color);
   color: var(--text-primary);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 500;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.social-links a:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--glass-shadow-lg),
-    inset 0 1.5px 0 0 var(--specular-top),
-    inset 0 0 0 0.5px var(--specular-edge);
   text-decoration: none;
 }
 
+.social-links a::after {
+  content: '↗';
+  margin-left: auto;
+  color: var(--text-tertiary);
+  font-size: 0.9rem;
+}
+
+.social-links a:hover {
+  color: var(--accent-hover);
+}
+
 .social-links a i {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+  width: 1.1rem;
+  color: var(--text-tertiary);
 }
 
-.social-links a:hover i {
-  color: var(--text-primary);
+.experience,
+.education,
+.projects {
+  margin-bottom: 4.5rem;
 }
 
-/* ============================================================
-   9. Common Section Styles
-   ============================================================ */
-section {
-  margin-bottom: 4rem;
-}
-
-/* ============================================================
-   10. Experience & Education (Glass Timeline)
-   ============================================================ */
-.experience, .education {
-  margin-bottom: 3rem;
-}
-
-.experience-list, .education-list {
+.experience-list,
+.education-list {
+  display: grid;
+  gap: 0;
   list-style: none;
-  border-left: 2px solid var(--border-color);
-  padding-left: 1.5rem;
+  border-top: 1px solid var(--border-color);
 }
 
-.experience-item, .education-item {
+.experience-item,
+.education-item,
+.publication-item,
+.interest-item,
+.blog-post {
   position: relative;
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--border-color);
   background: transparent;
-  border: 1px solid var(--glass-border);
-  border-radius: var(--card-radius);
-  box-shadow: var(--glass-shadow);
-
-  isolation: isolate;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.experience-item:hover, .education-item:hover {
-  box-shadow: var(--glass-shadow-lg);
-  transform: translateY(-2px);
-}
-
-/* Timeline dot — uses ::before, sits outside overflow */
-.experience-item::before, .education-item::before {
+.experience-item::before,
+.education-item::before {
   content: '';
   position: absolute;
-  left: -1.95rem;
-  top: 1.5rem;
-  width: 12px;
-  height: 12px;
+  top: 1.85rem;
+  left: -1.1rem;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--accent);
-  border: 2px solid var(--bg-primary);
-  box-shadow: 0 0 0 2px var(--border-color), 0 0 10px rgba(0, 113, 227, 0.20);
-  z-index: 5;
 }
 
-/* Hide toggle icon — description always visible */
 .experience-item .toggle-icon,
 .education-item .toggle-icon {
   display: none;
 }
 
-.experience-item-header, .education-item-header {
-  display: flex;
+.experience-item-header,
+.education-item-header {
+  display: grid;
+  grid-template-columns: 44px minmax(180px, 1fr) minmax(180px, 0.9fr) auto;
+  gap: 0.8rem 1rem;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
-  flex-wrap: wrap;
 }
 
-.company-logo, .university-logo {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
+.education-item-header {
+  grid-template-columns: 44px minmax(0, 1fr);
+}
+
+.company-logo,
+.university-logo {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background: var(--surface);
   object-fit: contain;
-  background-color: rgba(255, 255, 255, 0.90);
-  padding: 4px;
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  padding: 5px;
+  filter: saturate(0.85);
 }
 
-.status-indicator {
-  display: inline-block;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-}
-
-.status-current  { background-color: var(--status-current); }
-.status-future   { background-color: var(--status-future); }
-.status-completed { background-color: var(--status-completed); }
-.status-past     { display: none; }
-
-.experience-item h3, .education-item h3 {
-  font-size: 1.1rem;
-  font-weight: 600;
+.experience-item h3,
+.education-item h3 {
   margin: 0;
-  margin-right: 0.5rem;
+  font-size: 1.08rem;
 }
 
-.position-wrapper, .degree-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.position-wrapper::before {
-  content: "·";
-  color: var(--text-tertiary);
-  font-size: 1.5rem;
-  line-height: 1;
-  margin-right: 0.25rem;
-}
-
-.position, .degree {
-  font-weight: 500;
-  margin: 0;
-  font-size: 1rem;
-  color: var(--text-primary);
-}
-
+.position-wrapper,
+.degree-wrapper,
 .duration-wrapper {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-left: auto;
 }
 
+.position,
+.degree,
 .duration {
-  font-size: 0.9rem;
-  color: var(--text-tertiary);
   margin: 0;
 }
 
-.description {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  margin-top: 1rem;
-  margin-left: 0;
-  display: block;
-  line-height: 1.65;
-}
-
-/* ============================================================
-   11. Projects Section
-   ============================================================ */
-.projects {
-  margin-bottom: 3rem;
-}
-
-.view-more {
-  display: inline-block;
-  margin-bottom: 1.5rem;
-  font-size: 1rem;
+.position,
+.degree {
+  color: var(--text-primary);
+  font-size: 0.98rem;
   font-weight: 500;
 }
 
-.project-grid {
+.duration-wrapper {
+  justify-content: flex-end;
+}
+
+.duration {
+  color: var(--text-tertiary);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.description {
+  max-width: 820px;
+  margin-top: 1rem;
+  margin-bottom: 0;
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.status-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-current { background-color: var(--status-current); }
+.status-future { background-color: var(--status-future); }
+.status-completed { background-color: var(--status-completed); }
+.status-past { display: none; }
+
+.view-more {
+  display: inline-flex;
+  margin: -0.5rem 0 1.5rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.project-grid,
+.interests-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--border-color);
+  background: var(--border-color);
+}
+
+.project-card,
+.interest-item {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  background: var(--surface);
 }
 
 .project-card {
-  position: relative;
   overflow: hidden;
-
-  background: transparent;
-  border: 1px solid var(--glass-border);
-  border-radius: var(--card-radius);
-  box-shadow: var(--glass-shadow);
-
-  isolation: isolate;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--glass-shadow-lg);
 }
 
 .project-cover {
   width: 100%;
   aspect-ratio: 16 / 9;
-  background-size: cover;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--surface-muted);
   background-position: center;
-  border-bottom: 1px solid var(--glass-border-subtle);
-  background-color: rgba(128, 128, 128, 0.05);
-  position: relative;
-  z-index: 1;
+  background-size: cover;
+  filter: saturate(0.78) contrast(1.04);
 }
 
 .project-info {
-  padding: 1.25rem;
   display: flex;
+  flex: 1;
   flex-direction: column;
-  flex-grow: 1;
-  position: relative;
-  z-index: 1;
+  padding: 1.15rem;
 }
 
 .project-info h3 {
+  margin-bottom: 0.7rem;
   font-size: 1.05rem;
-  margin-bottom: 0.35rem;
-}
-
-.project-type {
-  display: inline-block;
-  padding: 0.2rem 0.6rem;
-  background: var(--accent);
-  color: #fff;
-  border-radius: var(--pill-radius);
-  font-size: 0.75rem;
-  font-weight: 500;
-  margin-bottom: 0.75rem;
+  line-height: 1.2;
 }
 
 .project-tech {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
+  gap: 0.45rem;
+  margin-bottom: 0.85rem;
 }
 
 .project-tech img {
-  height: 26px;
-  width: 26px;
+  width: 24px;
+  height: 24px;
   object-fit: contain;
+  opacity: 0.8;
+  filter: saturate(0.85);
 }
 
 .project-description {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
+  flex: 1;
   margin-bottom: 1rem;
-  flex-grow: 1;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
   line-height: 1.55;
 }
 
-.project-link {
-  display: inline-block;
-  font-size: 0.9rem;
-  font-weight: 500;
-  margin-top: auto;
-}
-
-/* ============================================================
-   12. Publications Page
-   ============================================================ */
-.publication-item {
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  position: relative;
-  overflow: hidden;
-
-  background: transparent;
-  border: 1px solid var(--glass-border);
-  border-radius: var(--card-radius);
-  box-shadow: var(--glass-shadow);
-
-  isolation: isolate;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.publication-item:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--glass-shadow-lg);
-}
-
-.publication-item h3 {
-  color: var(--text-primary);
-  margin-bottom: 0.5rem;
-  font-size: 1.15rem;
+.project-link,
+.publication-link,
+.read-more {
+  align-self: flex-start;
+  color: var(--accent-hover);
+  font-size: 0.92rem;
   font-weight: 600;
 }
 
-.publication-authors {
-  color: var(--text-secondary);
-  margin-bottom: 0.5rem;
+.project-card:hover,
+.publication-item:hover,
+.interest-item:hover,
+.blog-post:hover {
+  background: #fffbf4;
+}
+
+.publications h1,
+.blog h1,
+main > section:first-child:not(.hero) h1 {
+  margin-bottom: 0.85rem;
+  font-size: clamp(3rem, 7vw, 5.7rem);
+}
+
+.publications-content h2,
+.research-interests h2 {
+  margin-top: 2.5rem;
+}
+
+.publication-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.5rem 1.5rem;
+}
+
+.publication-item h3,
+.publication-description,
+.publication-links {
+  grid-column: 1 / -1;
+}
+
+.publication-authors,
+.publication-venue,
+.publication-status {
+  margin-bottom: 0;
   font-size: 0.95rem;
 }
 
 .publication-venue {
   color: var(--text-primary);
   font-style: italic;
-  margin-bottom: 1rem;
-  font-size: 0.95rem;
 }
 
 .publication-status {
-  display: inline-block;
-  padding: 0.25rem 0.85rem;
-  background: var(--status-completed);
-  color: white;
-  border-radius: var(--pill-radius);
-  font-size: 0.8rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
+  justify-self: start;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--status-completed);
+  font-size: 0.78rem;
+  font-weight: 600;
 }
 
 .publication-description {
-  color: var(--text-secondary);
+  max-width: 780px;
+  margin: 0.65rem 0 0;
   line-height: 1.65;
-  margin-bottom: 1rem;
 }
 
 .publication-links {
   display: flex;
-  gap: 0.75rem;
   flex-wrap: wrap;
-  margin-top: 1rem;
-}
-
-.publication-link {
-  padding: 0.5rem 1.15rem;
-  background: var(--accent);
-  color: white;
-  border-radius: var(--pill-radius);
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 2px 8px rgba(0, 113, 227, 0.25);
-}
-
-.publication-link:hover {
-  background: var(--accent-hover);
-  color: white;
-  text-decoration: none;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 113, 227, 0.35);
+  gap: 1rem;
+  margin-top: 0.5rem;
 }
 
 .publication-link-placeholder,
@@ -798,176 +547,66 @@ section {
   margin-top: 4rem;
 }
 
-.interests-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.25rem;
-}
-
 .interest-item {
-  padding: 1.5rem;
-  position: relative;
-  overflow: hidden;
-
-  background: transparent;
-  border: 1px solid var(--glass-border);
-  border-radius: var(--card-radius);
-  box-shadow: var(--glass-shadow);
-
-  isolation: isolate;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.interest-item:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--glass-shadow-lg);
+  padding: 1.2rem;
+  border-bottom: 0;
 }
 
 .interest-item h3 {
-  color: var(--text-primary);
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-  font-weight: 600;
+  margin-bottom: 0.65rem;
+  font-size: 1.02rem;
 }
 
 .interest-item p {
-  color: var(--text-secondary);
-  line-height: 1.65;
-  font-size: 0.95rem;
+  margin-bottom: 0;
+  font-size: 0.93rem;
+  line-height: 1.6;
 }
 
-/* ============================================================
-   13. Blog Page
-   ============================================================ */
 .blog-posts {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.blog-post {
-  padding: 2rem;
-  position: relative;
-  overflow: hidden;
-
-  background: transparent;
-  border: 1px solid var(--glass-border);
-  border-radius: var(--card-radius);
-  box-shadow: var(--glass-shadow);
-
-  isolation: isolate;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.blog-post:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--glass-shadow-lg);
+  border-top: 1px solid var(--border-color);
 }
 
 .blog-post h2 {
-  font-size: 1.35rem;
+  display: block;
   margin-bottom: 0.5rem;
-  border: none;
-  padding: 0;
+  font-size: 1.5rem;
+  text-transform: none;
+}
+
+.blog-post h2::after {
+  display: none;
 }
 
 .blog-post h2 a {
-  color: var(--text-primary);
+  text-decoration: none;
 }
 
 .post-date {
   color: var(--text-tertiary);
   font-size: 0.9rem;
-  margin-bottom: 1rem;
 }
 
 .post-excerpt {
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  color: var(--text-secondary);
+  max-width: 740px;
 }
 
-.read-more {
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-/* ============================================================
-   14. Footer
-   ============================================================ */
 footer {
-  position: relative;
-  margin-top: 4rem;
-  padding: 1.5rem 2rem;
-  text-align: center;
-
-  background: transparent;
-  border: 1px solid var(--glass-border);
-  border-radius: var(--card-radius);
-  box-shadow: var(--glass-shadow),
-    inset 0 1px 0 0 var(--specular-top),
-    inset 0 0 0 0.5px var(--specular-edge);
-
-  isolation: isolate;
-  overflow: hidden;
+  margin-top: 5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-strong);
 }
 
 footer p {
-  color: var(--text-tertiary);
-  font-size: 0.85rem;
   margin: 0;
+  color: var(--text-tertiary);
+  font-size: 0.88rem;
 }
 
-/* ============================================================
-   15. Glass Specular & Mouse-Follow Effect
-   Specular box-shadow is always visible; mouse-tracking
-   gradient only appears on hover.
-   ============================================================ */
-.experience-item::after,
-.education-item::after,
-.project-card::after,
-.publication-item::after,
-.interest-item::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 2;
-
-  /* Always-visible specular edge highlights */
-  box-shadow:
-    inset 0 1.5px 0 0 var(--specular-top),
-    inset 1px 0 0 0 var(--specular-edge),
-    inset -1px 0 0 0 var(--specular-edge),
-    inset 0 -0.5px 0 0 rgba(255, 255, 255, 0.04);
-
-  /* Mouse-tracking gradient — transparent until hover */
-  background: transparent;
-  transition: background 0.3s ease;
-}
-
-.experience-item:hover::after,
-.education-item:hover::after,
-.project-card:hover::after,
-.publication-item:hover::after,
-.interest-item:hover::after {
-  background: radial-gradient(
-    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    var(--highlight-color),
-    transparent 40%
-  );
-}
-
-/* ============================================================
-   16. Fade-In Animations
-   ============================================================ */
 .fade-in {
   opacity: 0;
-  transform: translateY(24px);
-  transition:
-    opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .fade-in.visible {
@@ -975,18 +614,14 @@ footer p {
   transform: translateY(0);
 }
 
-/* Stagger children within fade-in sections */
 .fade-in .experience-item,
 .fade-in .education-item,
 .fade-in .project-card,
 .fade-in .publication-item,
 .fade-in .interest-item {
   opacity: 0;
-  transform: translateY(16px);
-  transition:
-    opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(12px);
+  transition: opacity 0.45s ease, transform 0.45s ease, background 0.2s ease;
 }
 
 .fade-in.visible .experience-item,
@@ -998,143 +633,6 @@ footer p {
   transform: translateY(0);
 }
 
-/* Stagger delays applied via JS and cleaned up after animation */
-
-/* ============================================================
-   17. Accessibility (Reduced Motion)
-   ============================================================ */
-@media (prefers-reduced-motion: reduce) {
-  body::before {
-    animation: none;
-  }
-
-  .fade-in {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  .fade-in .experience-item,
-  .fade-in .education-item,
-  .fade-in .project-card,
-  .fade-in .publication-item,
-  .fade-in .interest-item {
-    opacity: 1;
-    transform: none;
-  }
-
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-  }
-}
-
-/* ============================================================
-   18. Responsive Design
-   ============================================================ */
-
-/* Tablet & small laptops */
-@media (max-width: 768px) {
-  :root {
-    --card-radius: 16px;
-  }
-
-  .container {
-    padding: 1.5rem 1rem;
-  }
-
-  h1 {
-    font-size: 2.25rem;
-  }
-
-  header {
-    border-radius: var(--card-radius);
-    padding: 0.5rem 0.5rem 0.5rem 1rem;
-    top: 0.5rem;
-    margin-bottom: 2rem;
-  }
-
-  nav a {
-    padding: 0.35rem 0.75rem;
-    font-size: 0.9rem;
-  }
-
-  .social-links a {
-    padding: 0.45rem 1rem;
-    font-size: 0.85rem;
-  }
-
-  .project-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .experience-item-header,
-  .education-item-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .position-wrapper::before {
-    display: none;
-  }
-
-  .duration-wrapper {
-    margin-left: 0;
-  }
-}
-
-/* Mobile phones */
-@media (max-width: 480px) {
-  :root {
-    --card-radius: 14px;
-  }
-
-  h1 {
-    font-size: 1.85rem;
-  }
-
-  .subtitle {
-    font-size: 1rem;
-  }
-
-  header {
-    flex-direction: column;
-    gap: 0.5rem;
-    border-radius: var(--card-radius);
-    padding: 0.75rem 1rem;
-  }
-
-  .social-links a span {
-    display: none;
-  }
-
-  .social-links a {
-    padding: 0.65rem;
-    border-radius: 50%;
-    width: 42px;
-    height: 42px;
-    justify-content: center;
-  }
-
-  .social-links a i {
-    font-size: 1.15rem;
-    color: var(--text-primary);
-  }
-
-  .experience-item, .education-item {
-    padding: 1.25rem;
-  }
-
-  .interests-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ============================================================
-   Remove unused legacy styles
-   ============================================================ */
 .discord-card,
 .gems-grid,
 .gem-card,
@@ -1144,4 +642,125 @@ footer p {
 .post-footer,
 .back-to-blog {
   display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .fade-in,
+  .fade-in .experience-item,
+  .fade-in .education-item,
+  .fade-in .project-card,
+  .fade-in .publication-item,
+  .fade-in .interest-item {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .project-grid,
+  .interests-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .experience-item-header {
+    grid-template-columns: 42px minmax(0, 1fr);
+  }
+
+  .position-wrapper,
+  .duration-wrapper {
+    grid-column: 2;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0.9rem 1rem 2rem;
+  }
+
+  header {
+    position: static;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 -1rem 3.25rem;
+    padding: 0.85rem 1rem;
+  }
+
+  nav {
+    width: 100%;
+  }
+
+  nav ul {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  nav a {
+    padding-inline: 0.65rem;
+    font-size: 0.88rem;
+  }
+
+  h1 {
+    font-size: clamp(2.55rem, 16vw, 4.2rem);
+  }
+
+  h2 {
+    font-size: 0.95rem;
+  }
+
+  section {
+    margin-bottom: 3.75rem;
+  }
+
+  .hero {
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+  }
+
+  .social-links a span {
+    overflow-wrap: anywhere;
+  }
+
+  .project-grid,
+  .interests-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .experience-item,
+  .education-item,
+  .publication-item,
+  .blog-post {
+    padding: 1.15rem 0;
+  }
+
+  .experience-item::before,
+  .education-item::before {
+    display: none;
+  }
+
+  .publication-item {
+    display: block;
+  }
+
+  .publication-authors,
+  .publication-venue,
+  .publication-status {
+    margin-bottom: 0.45rem;
+  }
 }
