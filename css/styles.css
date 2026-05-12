@@ -17,7 +17,7 @@
   --status-future: #8c5b98;
   --status-completed: #6e783a;
   --radius: 8px;
-  --max-width: 1080px;
+  --max-width: 980px;
 }
 
 *,
@@ -288,14 +288,7 @@ section {
 
 .experience-item::before,
 .education-item::before {
-  content: '';
-  position: absolute;
-  top: 2.05rem;
-  left: -0.95rem;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent);
+  display: none;
 }
 
 .experience-item .toggle-icon,
@@ -378,7 +371,7 @@ section {
 }
 
 .description {
-  max-width: 760px;
+  max-width: 720px;
   margin-top: 1.05rem;
   margin-left: 52px;
   margin-bottom: 0;
@@ -388,16 +381,15 @@ section {
 }
 
 .status-indicator {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
+  display: none;
 }
 
-.status-current { background-color: var(--status-current); }
-.status-future { background-color: var(--status-future); }
-.status-completed { background-color: var(--status-completed); }
-.status-past { display: none; }
+.status-current,
+.status-future,
+.status-completed,
+.status-past {
+  display: none;
+}
 
 .view-more {
   display: inline-flex;
